@@ -1,0 +1,33 @@
+{
+  "name": "@survicate/react-native-survicate",
+  "title": "React Native Survicate Bindings",
+  "version": "1.0.0",
+  "description": "React Native bindings for Survicate Mobile SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Survicate/react-native-survicate.git",
+    "baseUrl": "https://github.com/Survicate/react-native-survicate"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Survicate",
+    "email": "help@survicate.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.8.3",
+    "react-native": "^0.59.10"
+  }
+}
