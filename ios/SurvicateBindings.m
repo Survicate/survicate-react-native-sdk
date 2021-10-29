@@ -12,37 +12,43 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(enterScreen:(NSString *)screenName)
 {
-    [[Survicate shared] enterScreenWithValue:screenName];
+    [[SurvicateSdk shared] enterScreenWithValue:screenName];
 }
 
 RCT_EXPORT_METHOD(leaveScreen:(NSString *)screenName)
 {
-    [[Survicate shared] leaveScreenWithValue:screenName];
+    [[SurvicateSdk shared] leaveScreenWithValue:screenName];
 }
 
 RCT_EXPORT_METHOD(invokeEvent:(NSString *)eventName)
 {
-    [[Survicate shared] invokeEventWithName:eventName];
+    [[SurvicateSdk shared] invokeEventWithName:eventName];
 }
 
 RCT_EXPORT_METHOD(setUserId:(NSString *)userId)
 {
-    [[Survicate shared] setUserTraitWithName:@"user_id" value:userId];
+    [[SurvicateSdk shared] setUserTraitWithName:@"user_id" value:userId];
 }
 
 RCT_EXPORT_METHOD(setUserTrait:(NSString *)traitName value:(NSString *)value)
 {
-    [[Survicate shared] setUserTraitWithName:traitName value:value];
+    [[SurvicateSdk shared] setUserTraitWithName:traitName value:value];
 }
 
 RCT_EXPORT_METHOD(initialize)
 {
-    [[Survicate shared] initialize];
+    [[SurvicateSdk shared] initialize];
 }
 
 RCT_EXPORT_METHOD(reset)
 {
-    [[Survicate shared] reset];
+    [[SurvicateSdk shared] reset];
+}
+
+RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
+{
+    NSError *error;
+    [[SurvicateSdk shared] setWorkspaceKey:workspaceKey error: &error];
 }
 
 @end
