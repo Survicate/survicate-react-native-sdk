@@ -45,4 +45,10 @@ RCT_EXPORT_METHOD(reset)
     [[SurvicateSdk shared] reset];
 }
 
+RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
+{
+    NSError *error;
+    [[SurvicateSdk shared] setWorkspaceKey:workspaceKey error: &error];
+}
+
 @end

@@ -55,4 +55,9 @@ public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
     public void reset() {
         Survicate.reset();
     }
+
+    @ReactMethod
+    public void setWorkspaceKey(String workspaceKey) {
+        Survicate.Survicate.setWorkspaceKey(workspaceKey);
+    }
 }
