@@ -58,6 +58,6 @@ public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setWorkspaceKey(String workspaceKey) {
-        Survicate.Survicate.setWorkspaceKey(workspaceKey);
+        Survicate.setWorkspaceKey(workspaceKey);
     }
 }
