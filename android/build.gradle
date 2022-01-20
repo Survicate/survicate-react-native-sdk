@@ -77,7 +77,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation 'com.survicate:survicate-sdk:1.5.5'
+    implementation 'com.survicate:survicate-sdk:1.5.6'
 }
 
 def configureReactNativePom(def pom) {
