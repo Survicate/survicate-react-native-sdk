@@ -35,10 +35,8 @@ buildscript {
     }
 }
 
-plugins {
-    id('com.android.library')
-    id('maven-publish')
-}
+apply plugin: 'com.android.library'
+apply plugin: "maven-publish"
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -76,35 +74,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation 'com.survicate:survicate-sdk:1.5.9'
-}
-
-def configureReactNativePom(def pom) {
-    def packageJson = new groovy.json.JsonSlurper().parseText(file('../package.json').text)
-
-    pom.project {
-        name packageJson.title
-        artifactId packageJson.name
-        version = packageJson.version
-        group = "com.survicate.react"
-        description packageJson.description
-        url packageJson.repository.baseUrl
-
-        licenses {
-            license {
-                name packageJson.license
-                url packageJson.repository.baseUrl + '/blob/master/' + packageJson.licenseFilename
-                distribution 'repo'
-            }
-        }
-
-        developers {
-            developer {
-                id packageJson.author.username
-                name packageJson.author.name
-            }
-        }
-    }
+    implementation 'com.survicate:survicate-sdk:1.5.12'
 }
 
 afterEvaluate { project ->
@@ -147,12 +117,11 @@ afterEvaluate { project ->
         archives androidJavadocJar
     }
 
-    task installArchives(type: Upload) {
-        configuration = configurations.archives
-        repositories.mavenDeployer {
-            // Deploy to react-native-event-bridge/maven, ready to publish to npm
-            repository url: "file://${projectDir}/../android/maven"
-            configureReactNativePom pom
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                artifact androidSourcesJar
+            }        
         }
     }
 }
