@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "react": "^16.8.1",
+    "react": ">=16.8.1",
     "react-native": ">=0.59.0-rc.0 <1.0.x"
   },
   "devDependencies": {
