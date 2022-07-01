@@ -60,4 +60,4 @@ Survicate.reset();
 
 ## Changelog
 
-The Survicate Mobile SDK change log can be found [here](https://developers.survicate.com/mobile-sdk/)
+The Survicate Mobile SDK change log can be found [here](https://developers.survicate.com/mobile-sdk/react-native/#changelog)
