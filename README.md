@@ -2,7 +2,7 @@
 
 ## Requirements:
 - iOS at least on version 10.0
-- Android at least on version 4.4
+- Android at least on version 5
 - React Native at least on version 0.59.10
 
 ## Getting started
