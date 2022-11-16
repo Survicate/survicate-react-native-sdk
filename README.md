@@ -1,8 +1,8 @@
 # @survicate/react-native-survicate [![npm version](https://badge.fury.io/js/%40survicate%2Freact-native-survicate.svg)](https://badge.fury.io/js/%40survicate%2Freact-native-survicate)
 
 ## Requirements:
-- iOS at least on version 10.0
-- Android at least on version 4.4
+- iOS at least on version 12.0
+- Android at least on version 5
 - React Native at least on version 0.59.10
 
 ## Getting started
