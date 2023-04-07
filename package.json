@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "index.js",
   "scripts": {
