@@ -56,6 +56,29 @@ Survicate.leaveScreen("screenName");
 Survicate.setUserId("screenName");
 Survicate.setUserTrait("traitName", "traitValue");
 Survicate.reset();
+
+useEffect(() => {
+  const eventEmitter = new NativeEventEmitter(Survicate);
+  eventEmitter.addListener('onSurveyDisplayed', (event) => {
+    console.debug('Displayed Survey', event);
+  });
+
+  eventEmitter.addListener('onQuestionAnswered', (event) => {
+    console.debug('Question Answered', event);
+  });
+
+  eventEmitter.addListener('onSurveyClosed', (event) => {
+    setShowSurveyButton(false);
+    console.debug('Survey Closed', event);
+  });
+
+  eventEmitter.addListener('onSurveyCompleted', (event) => {
+    setShowSurveyButton(false);
+    console.debug('Survey Completed', event);
+  });
+
+  return () => eventListener.remove();
+}, []);
 ```
 
 ## Changelog
