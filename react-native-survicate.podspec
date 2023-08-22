@@ -9,18 +9,18 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   React Native bindings for Survicate Mobile SDK
                    DESC
-  s.homepage     = "https://github.com/Survicate/react-native-survicate"
+  s.homepage     = "https://github.com/Survicate/survicate-react-native-sdk"
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
   s.authors      = { "Survicate" => "help@survicate.com" }
   s.platforms    = { :ios => "10.0" }
-  s.source       = { :git => "https://github.com/Survicate/react-native-survicate.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/Survicate/survicate-react-native-sdk.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "Survicate", "3.0.1"
+  s.dependency "Survicate", "3.0.2"
   # ...
   # s.dependency "..."
 end
