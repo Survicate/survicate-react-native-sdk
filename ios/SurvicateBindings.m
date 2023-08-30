@@ -35,7 +35,12 @@ RCT_EXPORT_METHOD(setUserTrait:(NSString *)traitName value:(NSString *)value)
     [[SurvicateSdk shared] setUserTraitWithName:traitName value:value];
 }
 
-RCT_EXPORT_METHOD(initialize)
+RCT_EXPORT_METHOD(initialize) __attribute__((deprecated("Use initializeSdk method instead. This method will be removed in version 4.0.")))
+{
+    [[SurvicateSdk shared] initialize];
+}
+
+RCT_EXPORT_METHOD(initializeSdk)
 {
     [[SurvicateSdk shared] initialize];
 }
