@@ -46,10 +46,6 @@ public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
         Survicate.setUserTrait(new UserTrait(userTrait, value));
     }
 
-    /**
-    * @deprecated Use {@link #initializeSdk()} instead. This method will be removed in version 4.0.
-    */
-    @Deprecated
     @ReactMethod
     public void initialize() {
         Survicate.init(reactContext);
