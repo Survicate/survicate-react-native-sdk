@@ -52,6 +52,11 @@ public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void initializeSdk() {
+        Survicate.init(reactContext);
+    }
+
+    @ReactMethod
     public void reset() {
         Survicate.reset();
     }

@@ -40,6 +40,11 @@ RCT_EXPORT_METHOD(initialize)
     [[SurvicateSdk shared] initialize];
 }
 
+RCT_EXPORT_METHOD(initializeSdk)
+{
+    [[SurvicateSdk shared] initialize];
+}
+
 RCT_EXPORT_METHOD(reset)
 {
     [[SurvicateSdk shared] reset];
