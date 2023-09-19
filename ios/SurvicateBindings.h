@@ -1,9 +1,11 @@
-#if __has_include("RCTBridgeModule.h")
-#import "RCTBridgeModule.h"
+#ifdef RCT_NEW_ARCH_ENABLED
+#import "RNSurvicateSpec.h"
+
+@interface SurvicateBindings : NSObject <NativeSurvicateModuleSpec>
 #else
 #import <React/RCTBridgeModule.h>
-#endif
 
 @interface SurvicateBindings : NSObject <RCTBridgeModule>
+#endif
 
 @end
