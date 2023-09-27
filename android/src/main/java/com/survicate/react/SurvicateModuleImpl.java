@@ -31,21 +31,21 @@ public class SurvicateModuleImpl extends SurvicateModule {
     @ReactMethod
     public void leaveScreen(String screenName) {
         Survicate.leaveScreen(screenName);
-     }
+    }
 
     @ReactMethod
     public void invokeEvent(String eventName) {
-         Survicate.invokeEvent(eventName);
+        Survicate.invokeEvent(eventName);
     }
 
     @ReactMethod
     public void setUserId(String userId) {
-       Survicate.setUserTrait(new UserTrait.UserId(userId));
+        Survicate.setUserTrait(new UserTrait.UserId(userId));
     }
 
     @ReactMethod
     public void setUserTrait(String userTrait, String value) {
-       Survicate.setUserTrait(new UserTrait(userTrait, value));
+        Survicate.setUserTrait(new UserTrait(userTrait, value));
     }
 
     @ReactMethod
