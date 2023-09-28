@@ -3,7 +3,7 @@
   "title": "React Native Survicate Bindings",
   "version": "3.0.3",
   "description": "React Native bindings for Survicate Mobile SDK",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,7 +27,20 @@
     "react-native": ">=0.60.0"
   },
   "devDependencies": {
+    "@tsconfig/react-native": "^3.0.2",
+    "@types/jest": "^29.5.4",
+    "@types/react": "^18.2.21",
+    "@types/react-test-renderer": "^18.0.1",
     "react": "18.2.0",
-    "react-native": "0.72.4"
+    "react-native": "0.72.4",
+    "typescript": "5.2.2"
+  },
+  "codegenConfig": {
+    "name": "RNSurvicateSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.survicate.react"
+    }
   }
 }

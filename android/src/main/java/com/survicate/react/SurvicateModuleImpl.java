@@ -1,24 +1,26 @@
 package com.survicate.react;
 
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 import com.survicate.surveys.Survicate;
 import com.survicate.surveys.traits.UserTrait;
 
-public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
+import com.survicate.react.SurvicateModule;
+
+public class SurvicateModuleImpl extends SurvicateModule {
+
+    public static final String NAME = "SurvicateBindings";
 
     private final ReactApplicationContext reactContext;
 
-    public SurvicateBindingsModule(ReactApplicationContext reactContext) {
+    public SurvicateModuleImpl(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
 
     @Override
     public String getName() {
-        return "SurvicateBindings";
+        return NAME;
     }
 
     @ReactMethod
@@ -29,9 +31,9 @@ public class SurvicateBindingsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void leaveScreen(String screenName) {
         Survicate.leaveScreen(screenName);
-     }
+    }
 
-     @ReactMethod
+    @ReactMethod
     public void invokeEvent(String eventName) {
         Survicate.invokeEvent(eventName);
     }

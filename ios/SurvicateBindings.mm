@@ -1,5 +1,5 @@
 #import "SurvicateBindings.h"
-@import Survicate;
+#import <Survicate/Survicate-Swift.h>
 
 @implementation SurvicateBindings
 
@@ -30,9 +30,9 @@ RCT_EXPORT_METHOD(setUserId:(NSString *)userId)
     [[SurvicateSdk shared] setUserTraitWithName:@"user_id" value:userId];
 }
 
-RCT_EXPORT_METHOD(setUserTrait:(NSString *)traitName value:(NSString *)value)
+RCT_EXPORT_METHOD(setUserTrait:(NSString *)traitName traitValue:(NSString *)traitValue)
 {
-    [[SurvicateSdk shared] setUserTraitWithName:traitName value:value];
+    [[SurvicateSdk shared] setUserTraitWithName:traitName value:traitValue];
 }
 
 RCT_EXPORT_METHOD(initialize)
@@ -55,5 +55,14 @@ RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
     NSError *error;
     [[SurvicateSdk shared] setWorkspaceKey:workspaceKey error: &error];
 }
+
+// Don't compile this code when we build for the old architecture.
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeSurvicateModuleSpecJSI>(params);
+}
+#endif
 
 @end
