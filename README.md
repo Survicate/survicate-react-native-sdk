@@ -1,9 +1,14 @@
 # @survicate/react-native-survicate [![npm version](https://badge.fury.io/js/%40survicate%2Freact-native-survicate.svg)](https://badge.fury.io/js/%40survicate%2Freact-native-survicate)
 
 ## Requirements:
+
 - iOS at least on version 12.0
 - Android at least on version 5
 - React Native at least on version 0.60.0
+
+## Expo support
+
+This package is not available in the [Expo Go](https://expo.io/client) app. Learn how you can use it with [custom dev clients](/plugin/install.md).
 
 ## Getting started
 
@@ -14,7 +19,9 @@
 `$ react-native link @survicate/react-native-survicate`
 
 ### Configuring Survicate Bindings for iOS
+
 - Add your Survicate workspace key to `Info.plist`
+
 ```
 	<key>Survicate</key>
 	<dict>
@@ -22,11 +29,13 @@
 		<string>YOUR_WORKSPACE_KEY</string>
 	</dict>
 ```
+
 - run command `pod install` in your `ios` directory
 
 ### Configuring Survicate Bindings for Android
 
 - Add maven repository to your project `build.gradle` located under `android` directory
+
 ```
 allprojects {
     repositories {
@@ -35,7 +44,9 @@ allprojects {
     }
 }
 ```
+
 - Add your Survicate workspace key to `AndroidManifest.xml`
+
 ```java
 <application
     android:name=".MyApp"
@@ -46,8 +57,9 @@ allprojects {
 ```
 
 ## Usage
+
 ```javascript
-import Survicate from '@survicate/react-native-survicate';
+import Survicate from "@survicate/react-native-survicate";
 
 Survicate.initialize();
 Survicate.invokeEvent("eventName");
