@@ -3,9 +3,27 @@
   "title": "React Native Survicate Bindings",
   "version": "3.1.0",
   "description": "React Native bindings for Survicate Mobile SDK",
-  "main": "src/index.js",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "src/index.ts",
+  "types": "lib/typescript/index.d.ts",
+  "source": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "react-native-survicate.podspec",
+    "!android/build",
+    "!ios/build",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bob build",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -33,7 +51,23 @@
     "@types/react-test-renderer": "^18.0.1",
     "react": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-builder-bob": "^0.23.1",
     "typescript": "5.2.2"
+  },
+  "react-native-builder-bob": {
+    "exclude": "**/NativeSurvicateModule.ts",
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
   },
   "codegenConfig": {
     "name": "RNSurvicateSpec",
