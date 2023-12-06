@@ -47,9 +47,7 @@ if (isNewArchitectureEnabled()) {
 }
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace "com.survicate.react"
-    }
+    namespace "com.survicate.react"
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
     defaultConfig {
