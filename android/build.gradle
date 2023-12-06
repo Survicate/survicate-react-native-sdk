@@ -47,6 +47,9 @@ if (isNewArchitectureEnabled()) {
 }
 
 android {
+    if (project.android.hasProperty("namespace")) {
+        namespace "com.survicate.react"
+    }
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
     defaultConfig {
@@ -55,6 +58,9 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+    }
+    buildFeatures {
+        buildConfig true
     }
     lintOptions {
         abortOnError false
@@ -95,7 +101,14 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation 'com.survicate:survicate-sdk:3.0.6'
+    implementation ('com.survicate:survicate-sdk:3.0.6') {
+        exclude group: 'io.coil-kt', module: 'coil-base'
+        exclude group: 'io.coil-kt', module: 'coil-gif'
+        exclude group: 'io.coil-kt', module: 'coil-svg'
+    }
+    implementation 'io.coil-kt:coil-base:2.4.0'
+    implementation 'io.coil-kt:coil-gif:2.4.0'
+    implementation 'io.coil-kt:coil-svg:2.4.0'
 }
 
 if (isNewArchitectureEnabled()) {
