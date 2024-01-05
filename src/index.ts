@@ -50,17 +50,19 @@ class Survicate {
 
 export class UserTrait {
   key: string;
-  value: string | null;
+  value: string;
 
-  constructor(key: string, value: string | number | boolean | Date | null) {
+  constructor(key: string, value: string | number | boolean | Date) {
+    if (key === null || value === null) {
+      throw new Error('Key and value cannot be null');
+    }
+
     this.key = key;
   
     if (value instanceof Date) {
       this.value = this.formatDateToTimeZoneIso(value);
-    } else if (value !== null) {
-      this.value = value.toString();
     } else {
-      this.value = null;
+      this.value = value.toString();
     }
   }
   
