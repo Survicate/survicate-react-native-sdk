@@ -47,14 +47,19 @@ allprojects {
 
 ## Usage
 ```javascript
-import Survicate from '@survicate/react-native-survicate';
+import Survicate, {UserTrait} from '@survicate/react-native-survicate';
 
 Survicate.initialize();
 Survicate.invokeEvent("eventName");
 Survicate.enterScreen("screenName");
 Survicate.leaveScreen("screenName");
-Survicate.setUserId("screenName");
-Survicate.setUserTrait("traitName", "traitValue");
+const userIdTrait = new UserTrait('user_id', 'id');
+Survicate.setUserTrait(userIdTrait);
+const textTrait = new UserTrait('name', 'John');
+const numberTrait = new UserTrait('age', 25);
+const booleanTrait = new UserTrait('isPremium', true);
+const dateTrait = new UserTrait('lastLogin', new Date());
+const timeIntervalTrait = new UserTrait('timeOfPurchase', new Date());
 Survicate.reset();
 ```
 
