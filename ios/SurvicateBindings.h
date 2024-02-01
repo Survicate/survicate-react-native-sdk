@@ -1,11 +1,14 @@
+#import <Survicate/Survicate-Swift.h>
+#import <React/RCTEventEmitter.h>
+
 #ifdef RCT_NEW_ARCH_ENABLED
 #import "RNSurvicateSpec.h"
 
-@interface SurvicateBindings : NSObject <NativeSurvicateModuleSpec>
+@interface SurvicateBindings : RCTEventEmitter<NativeSurvicateModuleSpec, SurvicateDelegate>
 #else
 #import <React/RCTBridgeModule.h>
 
-@interface SurvicateBindings : NSObject <RCTBridgeModule>
+@interface SurvicateBindings : RCTEventEmitter<RCTBridgeModule, SurvicateDelegate>
 #endif
 
 @end

@@ -12,10 +12,14 @@ public class SurvicateModuleImpl extends SurvicateModule {
     public static final String NAME = "SurvicateBindings";
 
     private final ReactApplicationContext reactContext;
+    private final SurvicateRNEventListener eventListener;
+
+    private int listenerCount = 0;
 
     public SurvicateModuleImpl(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        this.eventListener = new SurvicateRNEventListener(reactContext);
     }
 
     @Override
@@ -66,5 +70,28 @@ public class SurvicateModuleImpl extends SurvicateModule {
     @ReactMethod
     public void setWorkspaceKey(String workspaceKey) {
         Survicate.setWorkspaceKey(workspaceKey);
+    }
+
+    @ReactMethod
+    public void addListener(String eventName) {
+        if (listenerCount == 0) {
+            Survicate.setEventListener(eventListener);
+        }
+
+        listenerCount++;
+    }
+
+    @ReactMethod
+    public void removeListeners(int count) {
+        listenerCount -= count;
+
+        if (listenerCount == 0) {
+            Survicate.setEventListener(null);
+        }
+    }
+
+    @ReactMethod
+    public void removeListeners(double count) {
+        removeListeners((int) count);
     }
 }
