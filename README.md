@@ -63,6 +63,5 @@ const timeIntervalTrait = new UserTrait('timeOfPurchase', new Date());
 Survicate.reset();
 ```
 
-## Changelog
+For details and changelog refer to our [developer docs](https://developers.survicate.com/mobile-sdk/react-native/).
 
-The Survicate Mobile SDK change log can be found [here](https://developers.survicate.com/mobile-sdk/react-native/#changelog)
