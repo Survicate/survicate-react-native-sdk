@@ -99,14 +99,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation ('com.survicate:survicate-sdk:4.0.2') {
-        exclude group: 'io.coil-kt', module: 'coil-base'
-        exclude group: 'io.coil-kt', module: 'coil-gif'
-        exclude group: 'io.coil-kt', module: 'coil-svg'
-    }
-    implementation 'io.coil-kt:coil-base:2.4.0'
-    implementation 'io.coil-kt:coil-gif:2.4.0'
-    implementation 'io.coil-kt:coil-svg:2.4.0'
+    implementation ('com.survicate:survicate-sdk:4.1.0')
 }
 
 if (isNewArchitectureEnabled()) {
