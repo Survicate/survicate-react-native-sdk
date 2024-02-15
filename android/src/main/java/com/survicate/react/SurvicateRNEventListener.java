@@ -10,17 +10,26 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.survicate.surveys.SurvicateAnswer;
 import com.survicate.surveys.SurvicateEventListener;
+import com.survicate.surveys.SurveyDisplayedEvent;
+import com.survicate.surveys.QuestionAnsweredEvent;
+import com.survicate.surveys.SurveyClosedEvent;
+import com.survicate.surveys.SurveyCompletedEvent;
 
 import javax.annotation.Nullable;
 
 class SurvicateRNEventListener extends SurvicateEventListener {
 
     private static final String SURVEY_ID = "surveyId";
+    private static final String SURVEY_NAME = "surveyName";
+    private static final String RESPONSE_UUID = "responseUuid";
+    private static final String VISITOR_UUID = "visitorUuid";
     private static final String QUESTION_ID = "questionId";
+    private static final String QUESTION = "question";
     private static final String ANSWER_TYPE = "answerType";
     private static final String ANSWER_ID = "answerId";
     private static final String ANSWER_IDS = "answerIds";
     private static final String ANSWER_VALUE = "answerValue";
+    private static final String PANEL_ANSWER_URL = "panelAnswerUrl";
 
     private ReactApplicationContext reactContext;
 
@@ -29,33 +38,38 @@ class SurvicateRNEventListener extends SurvicateEventListener {
     }
 
     @Override
-    public void onSurveyDisplayed(@NonNull String surveyId) {
+    public void onSurveyDisplayed(@NonNull SurveyDisplayedEvent event) {
         WritableMap params = Arguments.createMap();
-        params.putString(SURVEY_ID, surveyId);
+        params.putString(SURVEY_ID, event.getSurveyId());
         sendEvent(reactContext, "onSurveyDisplayed", params);
     }
 
     @Override
-    public void onQuestionAnswered(@NonNull String surveyId, long questionId, @NonNull SurvicateAnswer answer) {
+    public void onQuestionAnswered(@NonNull QuestionAnsweredEvent event) {
         WritableMap params = Arguments.createMap();
-        params.putString(SURVEY_ID, surveyId);
-        params.putDouble(QUESTION_ID, questionId);
+        params.putString(SURVEY_ID, event.getSurveyId());
+        params.putString(SURVEY_NAME, event.getSurveyName());
+        params.putString(RESPONSE_UUID, event.getResponseUuid());
+        params.putString(VISITOR_UUID, event.getVisitorUuid());
+        params.putString(PANEL_ANSWER_URL, event.getPanelAnswerUrl());
+        params.putDouble(QUESTION_ID, event.getQuestionId());
+        params.putString(QUESTION, event.getQuestionText());
 
-        if (answer.getType() != null) {
-            params.putString(ANSWER_TYPE, answer.getType());
+        if (event.getAnswer().getType() != null) {
+            params.putString(ANSWER_TYPE, event.getAnswer().getType());
         } else {
             params.putNull(ANSWER_TYPE);
         }
 
-        if (answer.getId() != null) {
-            params.putDouble(ANSWER_ID, answer.getId());
+        if (event.getAnswer().getId() != null) {
+            params.putDouble(ANSWER_ID, event.getAnswer().getId());
         } else {
             params.putNull(ANSWER_ID);
         }
 
-        if (answer.getIds() != null) {
+        if (event.getAnswer().getIds() != null) {
             WritableArray ids = Arguments.createArray();
-            for (long id : answer.getIds()) {
+            for (long id : event.getAnswer().getIds()) {
                 ids.pushDouble(id);
             }
             params.putArray(ANSWER_IDS, ids);
@@ -63,8 +77,8 @@ class SurvicateRNEventListener extends SurvicateEventListener {
             params.putArray(ANSWER_IDS, Arguments.createArray());
         }
 
-        if (answer.getValue() != null) {
-            params.putString(ANSWER_VALUE, answer.getValue());
+        if (event.getAnswer().getValue() != null) {
+            params.putString(ANSWER_VALUE, event.getAnswer().getValue());
         } else {
             params.putNull(ANSWER_VALUE);
         }
@@ -73,16 +87,16 @@ class SurvicateRNEventListener extends SurvicateEventListener {
     }
 
     @Override
-    public void onSurveyClosed(@NonNull String surveyId) {
+    public void onSurveyClosed(@NonNull SurveyClosedEvent event) {
         WritableMap params = Arguments.createMap();
-        params.putString(SURVEY_ID, surveyId);
+        params.putString(SURVEY_ID, event.getSurveyId());
         sendEvent(reactContext, "onSurveyClosed", params);
     }
 
     @Override
-    public void onSurveyCompleted(@NonNull String surveyId) {
+    public void onSurveyCompleted(@NonNull SurveyCompletedEvent event) {
         WritableMap params = Arguments.createMap();
-        params.putString(SURVEY_ID, surveyId);
+        params.putString(SURVEY_ID, event.getSurveyId());
         sendEvent(reactContext, "onSurveyCompleted", params);
     }
 
