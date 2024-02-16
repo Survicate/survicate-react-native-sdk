@@ -70,10 +70,21 @@ class Survicate {
     );
 
     const onQuestionAnsweredCallback = (nativeEvent: any) => {
+      let answer: SurvicateAnswer = {
+        type: nativeEvent.answerType,
+        id: nativeEvent.answerId,
+        ids: nativeEvent.answerIds,
+        value: nativeEvent.answerValue
+      };
       let event: QuestionAnsweredEvent = {
         surveyId: nativeEvent.surveyId,
+        surveyName: nativeEvent.surveyName,
+        visitorUuid: nativeEvent.visitorUuid,
+        responseUuid: nativeEvent.responseUuid,
         questionId: nativeEvent.questionId,
-        answer: nativeEvent.answer,
+        question: nativeEvent.question,
+        answer: answer,
+        panelAnswerUrl: nativeEvent.panelAnswerUrl,
       };
       if (listener.onQuestionAnswered !== undefined) {
         listener.onQuestionAnswered!(event);
@@ -156,8 +167,13 @@ export type SurveyDisplayedEvent = {
 
 export type QuestionAnsweredEvent = {
   surveyId: string;
+  surveyName: string;
+  visitorUuid: string;
+  responseUuid: string;
   questionId: string;
+  question: string | undefined;
   answer: SurvicateAnswer;
+  panelAnswerUrl: string;
 };
 
 export type SurvicateAnswer = {
