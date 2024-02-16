@@ -2,6 +2,9 @@
 #import <Survicate/Survicate-Swift.h>
 
 @implementation SurvicateBindings
+{
+    bool hasListeners;
+}
 
 - (dispatch_queue_t)methodQueue
 {
@@ -56,10 +59,58 @@ RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
     [[SurvicateSdk shared] setWorkspaceKey:workspaceKey error: &error];
 }
 
+
+- (NSArray<NSString*> *)supportedEvents {
+    return @[@"onQuestionAnswered", @"onSurveyClosed", @"onSurveyCompleted", @"onSurveyDisplayed"];
+}
+
+- (void)startObserving {
+    hasListeners = YES;
+    [[SurvicateSdk shared] setDelegate:self];
+}
+
+- (void)stopObserving {
+    hasListeners = NO;
+    [[SurvicateSdk shared] setDelegate:nil];
+}
+
+- (void)surveyDisplayedWithEvent:(SurveyDisplayedEvent * _Nonnull)event {
+    if (!hasListeners) return;
+    [self sendEventWithName:@"onSurveyDisplayed" body:@{@"surveyId": event.surveyId}];
+}
+
+- (void)questionAnswered:(QuestionAnsweredEvent * _Nonnull)event {
+    if (!hasListeners) return;
+    [self sendEventWithName:@"onQuestionAnswered" body:
+         @{@"surveyId": event.surveyId,
+           @"surveyName": event.surveyName,
+           @"visitorUuid": event.visitorUUID,
+           @"responseUuid": event.responseUUID,
+           @"questionId": @(event.questionID),
+           @"question": event.question,
+           @"answerValue": event.answer.value ?: [NSNull null],
+           @"answerId": event.answer.id ?: [NSNull null],
+           @"answerType": event.answer.type ?: [NSNull null],
+           @"answerIds": event.answer.ids ?: @[],
+           @"panelAnswerUrl": event.panelAnswerUrl,
+         }
+    ];
+}
+
+- (void)surveyCompletedWithEvent:(SurveyCompletedEvent * _Nonnull)event {
+    if (!hasListeners) return;
+    [self sendEventWithName:@"onSurveyCompleted" body:@{@"surveyId": event.surveyId}];
+}
+
+- (void)surveyClosedWithEvent:(SurveyClosedEvent * _Nonnull)event {
+    if (!hasListeners) return;
+    [self sendEventWithName:@"onSurveyClosed" body:@{@"surveyId": event.surveyId}];
+}
+
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
+(const facebook::react::ObjCTurboModule::InitParams &)params
 {
     return std::make_shared<facebook::react::NativeSurvicateModuleSpecJSI>(params);
 }

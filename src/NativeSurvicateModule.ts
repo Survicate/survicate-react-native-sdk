@@ -11,6 +11,8 @@ export interface Spec extends TurboModule {
   setUserTrait(traitName: string, traitValue: string): void;
   setWorkspaceKey(workspaceKey: string): void;
   reset(): void;
+  addListener(eventName: string): void;
+  removeListeners(count: number): void;
 }
 
 export default TurboModuleRegistry.get<Spec>("SurvicateBindings");
