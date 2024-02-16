@@ -155,7 +155,7 @@ export class UserTrait {
     const offset = date.getTimezoneOffset();
     const offsetHours = Math.floor(Math.abs(offset) / 60);
     const offsetMinutes = Math.abs(offset) % 60;
-    date = new Date(date.getTime() - (offset * 60 * 1000));
+        date = new Date(date.getTime() - (offset * 60 * 1000));
     return date.toISOString().slice(0, -5) + (offset > 0 ? "-" : "+") + offsetHours.toString().padStart(2, '0') + ":" + offsetMinutes.toString().padStart(2, '0');
   }
 }
@@ -170,16 +170,16 @@ export type QuestionAnsweredEvent = {
   visitorUuid: string;
   responseUuid: string;
   questionId: string;
-  question: string | undefined;
+  question: string | null;
   answer: SurvicateAnswer;
   panelAnswerUrl: string;
 };
 
 export type SurvicateAnswer = {
-  type: string | undefined;
-  id: number | undefined;
+  type: string | null;
+  id: number | null;
   ids: number[];
-  value: string | undefined;
+  value: string | null;
 };
 
 export type SurveyCompletedEvent = {
