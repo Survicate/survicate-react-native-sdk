@@ -60,7 +60,7 @@ const numberTrait = new UserTrait('age', 25);
 const booleanTrait = new UserTrait('isPremium', true);
 const dateTrait = new UserTrait('lastLogin', new Date());
 const timeIntervalTrait = new UserTrait('timeOfPurchase', new Date());
-let listener: SurvicateEventListener = {
+const listener: SurvicateEventListener = {
     onSurveyDisplayed(event: SurveyDisplayedEvent) {},
     onQuestionAnswered(event: QuestionAnsweredEvent) {},
     onSurveyClosed(event: SurveyClosedEvent) {},
