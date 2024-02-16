@@ -9,7 +9,12 @@ const survicate: any = isTurboModuleEnabled
   ? require("./NativeSurvicateModule").default
   : SurvicateBindings;
 
+
+export class SurvicateIntegrations {}
+
 class Survicate {
+  static integrations = new SurvicateIntegrations();
+
   static initializeSdk(): void {
     survicate.initializeSdk();
   }
