@@ -75,7 +75,7 @@ public class SurvicateModuleImpl extends SurvicateModule {
     @ReactMethod
     public void addListener(String eventName) {
         if (listenerCount == 0) {
-            Survicate.setEventListener(eventListener);
+            Survicate.addEventListener(eventListener);
         }
 
         listenerCount++;
@@ -86,7 +86,7 @@ public class SurvicateModuleImpl extends SurvicateModule {
         listenerCount -= count;
 
         if (listenerCount == 0) {
-            Survicate.setEventListener(null);
+            Survicate.removeEventListener(eventListener);
         }
     }
 

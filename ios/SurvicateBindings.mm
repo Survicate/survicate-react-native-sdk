@@ -66,12 +66,12 @@ RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
 
 - (void)startObserving {
     hasListeners = YES;
-    [[SurvicateSdk shared] setDelegate:self];
+    [[SurvicateSdk shared] addListener:self];
 }
 
 - (void)stopObserving {
     hasListeners = NO;
-    [[SurvicateSdk shared] setDelegate:nil];
+    [[SurvicateSdk shared] removeListener:self];
 }
 
 - (void)surveyDisplayedWithEvent:(SurveyDisplayedEvent * _Nonnull)event {

@@ -49,7 +49,7 @@ allprojects {
 ```javascript
 import Survicate, {UserTrait} from '@survicate/react-native-survicate';
 
-Survicate.initialize();
+Survicate.initializeSdk();
 Survicate.invokeEvent("eventName");
 Survicate.enterScreen("screenName");
 Survicate.leaveScreen("screenName");
@@ -66,7 +66,7 @@ const listener: SurvicateEventListener = {
     onSurveyClosed(event: SurveyClosedEvent) {},
     onSurveyCompleted(event: SurveyCompletedEvent) {},
 }
-Survicate.addSurvicateEventListener(listener);
+const subscription = Survicate.addSurvicateEventListener(listener);
 Survicate.reset();
 ```
 
