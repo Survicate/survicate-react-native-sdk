@@ -1,4 +1,4 @@
-# @survicate/react-native-survicate [![npm version](https://badge.fury.io/js/%40survicate%2Freact-native-survicate.svg)](https://badge.fury.io/js/%40survicate%2Freact-native-survicate)
+# @survicate/react-native-survicate ![npm version](https://img.shields.io/npm/v/%40survicate%2Freact-native-survicate)
 
 Integrate Survicate into your React Native application to collect user feedback seamlessly.
 
@@ -106,6 +106,16 @@ const listener: SurvicateEventListener = {
 const subscription = Survicate.addSurvicateEventListener(listener);
 Survicate.reset();
 ```
+
+## Issues
+
+Got an Issue?
+
+To make things more streamlined, we’ve transitioned our issue reporting to our customer support platform. If you encounter any bugs or have feedback, please reach out to our customer support team. Your insights are invaluable to us, and we’re here to help ensure your experience is top-notch!
+
+Contact us via Intercom in the application, or drop us an email at: [hello@survicate.com]
+
+Thank you for your support and understanding!
 
 ## Changelog
 

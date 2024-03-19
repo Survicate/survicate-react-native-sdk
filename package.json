@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -13,13 +13,19 @@
     "lib",
     "android",
     "ios",
+    "cpp",
     "app.plugin.js",
     "react-native-survicate.podspec",
     "!android/build",
     "!ios/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!**/.*"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,13 +41,13 @@
     "react-native",
     "expo"
   ],
-  "author": {
-    "name": "Survicate",
-    "email": "help@survicate.com"
-  },
+  "author": "Survicate <hello@survicate.com> (https://survicate.com/)",
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://survicate.com"
+  },
   "peerDependencies": {
     "expo": ">=49",
     "react": ">=16.8.6",
