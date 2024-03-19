@@ -23,11 +23,10 @@ yarn add @survicate/react-native-survicate
 ### Using expo
 > Please note that due to custom native code in this package "Expo Go" is not available.
 
-To use @survicate/react-native-survicate in an Expo managed project, use npm or yarn or expo-cli.
+To use @survicate/react-native-survicate in an Expo managed project use npm, yarn or expo-cli.
 ```sh
 expo install @survicate/react-native-survicate
 ```
-
 
 ## Configuration
 
