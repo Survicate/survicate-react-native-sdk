@@ -1,17 +1,34 @@
-# @survicate/react-native-survicate [![npm version](https://badge.fury.io/js/%40survicate%2Freact-native-survicate.svg)](https://badge.fury.io/js/%40survicate%2Freact-native-survicate)
+# @survicate/react-native-survicate ![npm version](https://img.shields.io/npm/v/%40survicate%2Freact-native-survicate)
+
+Integrate Survicate into your React Native application to collect user feedback seamlessly.
 
 ## Requirements:
 - iOS at least on version 12.0
 - Android at least on version 5
 - React Native at least on version 0.60.0
 
-## Getting started
+## Installation
+This package can be installed using npm or yarn. If you're using Expo, follow the Expo-specific instructions.
 
-`$ npm install @survicate/react-native-survicate --save`
+### Using npm
+```sh
+npm install @survicate/react-native-survicate --save
+```
 
-### Mostly automatic installation
+### Using yarn
+```sh
+yarn add @survicate/react-native-survicate
+```
 
-`$ react-native link @survicate/react-native-survicate`
+### Using expo
+> Please note that due to custom native code in this package "Expo Go" is not available.
+
+To use @survicate/react-native-survicate in an Expo managed project use npm, yarn or expo-cli.
+```sh
+expo install @survicate/react-native-survicate
+```
+
+## Configuration
 
 ### Configuring Survicate Bindings for iOS
 - Add your Survicate workspace key to `Info.plist`
@@ -45,6 +62,25 @@ allprojects {
 </application>
 ```
 
+### Configuring Survicate Bindings for Expo
+- Add [config plugin](https://docs.expo.dev/config-plugins/introduction/) to `plugins` array of your `app.json` or `app.config.js`
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "@survicate/react-native-survicate",
+        {
+          "workspaceKey": "YOUR_WORKSPACE_KEY"
+        }
+      ]
+    ]
+  }
+}
+```
+> Please note that every time you change the props or plugins, you'll need to [rebuild](https://docs.expo.dev/workflow/customizing/) the native app.
+
+
 ## Usage
 ```javascript
 import Survicate, {UserTrait} from '@survicate/react-native-survicate';
@@ -69,6 +105,16 @@ const listener: SurvicateEventListener = {
 const subscription = Survicate.addSurvicateEventListener(listener);
 Survicate.reset();
 ```
+
+## Issues
+
+Got an Issue?
+
+To make things more streamlined, we’ve transitioned our issue reporting to our customer support platform. If you encounter any bugs or have feedback, please reach out to our customer support team. Your insights are invaluable to us, and we’re here to help ensure your experience is top-notch!
+
+Contact us via Intercom in the application, or drop us an email at: [hello@survicate.com]
+
+Thank you for your support and understanding!
 
 ## Changelog
 
