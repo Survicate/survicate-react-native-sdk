@@ -1,17 +1,35 @@
 # @survicate/react-native-survicate [![npm version](https://badge.fury.io/js/%40survicate%2Freact-native-survicate.svg)](https://badge.fury.io/js/%40survicate%2Freact-native-survicate)
 
+Integrate Survicate into your React Native application to collect user feedback seamlessly.
+
 ## Requirements:
 - iOS at least on version 12.0
 - Android at least on version 5
 - React Native at least on version 0.60.0
 
-## Getting started
+## Installation
+This package can be installed using npm or yarn. If you're using Expo, follow the Expo-specific instructions.
 
-`$ npm install @survicate/react-native-survicate --save`
+### Using npm
+```sh
+npm install @survicate/react-native-survicate --save
+```
 
-### Mostly automatic installation
+### Using yarn
+```sh
+yarn add @survicate/react-native-survicate
+```
 
-`$ react-native link @survicate/react-native-survicate`
+### Using expo
+> Please note that due to custom native code in this package "Expo Go" is not available.
+
+To use @survicate/react-native-survicate in an Expo managed project, use npm or yarn or expo-cli.
+```sh
+expo install @survicate/react-native-survicate
+```
+
+
+## Configuration
 
 ### Configuring Survicate Bindings for iOS
 - Add your Survicate workspace key to `Info.plist`
@@ -44,6 +62,25 @@ allprojects {
     <meta-data android:name="com.survicate.surveys.workspaceKey" android:value="YOUR_WORKSPACE_KEY"/>
 </application>
 ```
+
+### Configuring Survicate Bindings for Expo
+- Add [config plugin](https://docs.expo.dev/config-plugins/introduction/) to `plugins` array of your `app.json` or `app.config.js`
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "@survicate/react-native-survicate",
+        {
+          "workspaceKey": "YOUR_WORKSPACE_KEY"
+        }
+      ]
+    ]
+  }
+}
+```
+> Please note that every time you change the props or plugins, you'll need to [rebuild](https://docs.expo.dev/workflow/customizing/) the native app.
+
 
 ## Usage
 ```javascript
