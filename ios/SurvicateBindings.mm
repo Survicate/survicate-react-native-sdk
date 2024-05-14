@@ -23,9 +23,9 @@ RCT_EXPORT_METHOD(leaveScreen:(NSString *)screenName)
     [[SurvicateSdk shared] leaveScreenWithValue:screenName];
 }
 
-RCT_EXPORT_METHOD(invokeEvent:(NSString *)eventName)
+RCT_EXPORT_METHOD(invokeEvent:(NSString *)eventName eventProperties:(NSDictionary *) eventProperties)
 {
-    [[SurvicateSdk shared] invokeEventWithName:eventName];
+    [[SurvicateSdk shared] invokeEventWithName:eventName with:eventProperties];
 }
 
 RCT_EXPORT_METHOD(setUserId:(NSString *)userId)

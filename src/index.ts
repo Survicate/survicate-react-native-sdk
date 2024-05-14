@@ -9,7 +9,6 @@ const survicate: any = isTurboModuleEnabled
   ? require("./NativeSurvicateModule").default
   : SurvicateBindings;
 
-
 export class SurvicateIntegrations {}
 
 class Survicate {
@@ -19,8 +18,11 @@ class Survicate {
     survicate.initializeSdk();
   }
 
-  static invokeEvent(eventName: string): void {
-    survicate.invokeEvent(eventName);
+  static invokeEvent(
+    eventName: string,
+    eventProperties?: Record<string, string>
+  ): void {
+    survicate.invokeEvent(eventName, eventProperties || {});
   }
 
   static enterScreen(screenName: string): void {
@@ -79,7 +81,7 @@ class Survicate {
         type: nativeEvent.answerType,
         id: nativeEvent.answerId,
         ids: nativeEvent.answerIds,
-        value: nativeEvent.answerValue
+        value: nativeEvent.answerValue,
       };
       let event: QuestionAnsweredEvent = {
         surveyId: nativeEvent.surveyId,
@@ -155,8 +157,14 @@ export class UserTrait {
     const offset = date.getTimezoneOffset();
     const offsetHours = Math.floor(Math.abs(offset) / 60);
     const offsetMinutes = Math.abs(offset) % 60;
-        date = new Date(date.getTime() - (offset * 60 * 1000));
-    return date.toISOString().slice(0, -5) + (offset > 0 ? "-" : "+") + offsetHours.toString().padStart(2, '0') + ":" + offsetMinutes.toString().padStart(2, '0');
+    date = new Date(date.getTime() - offset * 60 * 1000);
+    return (
+      date.toISOString().slice(0, -5) +
+      (offset > 0 ? "-" : "+") +
+      offsetHours.toString().padStart(2, "0") +
+      ":" +
+      offsetMinutes.toString().padStart(2, "0")
+    );
   }
 }
 
