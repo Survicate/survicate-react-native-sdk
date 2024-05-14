@@ -2,10 +2,14 @@ package com.survicate.react;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.survicate.surveys.Survicate;
 import com.survicate.surveys.traits.UserTrait;
 
 import com.survicate.react.SurvicateModule;
+
+import java.util.Map;
+import java.util.HashMap;
 
 public class SurvicateModuleImpl extends SurvicateModule {
 
@@ -38,8 +42,15 @@ public class SurvicateModuleImpl extends SurvicateModule {
     }
 
     @ReactMethod
-    public void invokeEvent(String eventName) {
-        Survicate.invokeEvent(eventName);
+    public void invokeEvent(String eventName, ReadableMap eventProperties) {
+        Map<String, String> properties = new HashMap<>();
+        for (Map.Entry<String, Object> entry : eventProperties.toHashMap().entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue().toString();
+            properties.put(key, value);
+        }
+
+        Survicate.invokeEvent(eventName, properties);
     }
 
     @ReactMethod
