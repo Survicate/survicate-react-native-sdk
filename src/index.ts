@@ -20,13 +20,9 @@ class Survicate {
 
   static invokeEvent(
     eventName: string,
-    eventProperties?: Map<string, string>
+    eventProperties?: Record<string, string>
   ): void {
-    const map: { [key: string]: string } = {};
-    eventProperties?.forEach((value, key) => {
-      map[key] = value;
-    });
-    survicate.invokeEvent(eventName, map);
+    survicate.invokeEvent(eventName, eventProperties || {});
   }
 
   static enterScreen(screenName: string): void {
