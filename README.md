@@ -87,6 +87,11 @@ import Survicate, {UserTrait} from '@survicate/react-native-survicate';
 
 Survicate.initializeSdk();
 Survicate.invokeEvent("eventName");
+const properties = {
+  "property1": "value1",
+  "property2": "value2"
+};
+Survicate.invokeEvent("eventName", properties);
 Survicate.enterScreen("screenName");
 Survicate.leaveScreen("screenName");
 const userIdTrait = new UserTrait('user_id', 'id');
