@@ -86,6 +86,7 @@ allprojects {
 import Survicate, {UserTrait} from '@survicate/react-native-survicate';
 
 Survicate.initializeSdk();
+Survicate.setWorkspaceKey('WORKSPACE_KEY');
 Survicate.invokeEvent("eventName");
 const properties = {
   "property1": "value1",
