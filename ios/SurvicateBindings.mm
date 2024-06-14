@@ -38,11 +38,6 @@ RCT_EXPORT_METHOD(setUserTrait:(NSString *)traitName traitValue:(NSString *)trai
     [[SurvicateSdk shared] setUserTraitWithName:traitName value:traitValue];
 }
 
-RCT_EXPORT_METHOD(initialize)
-{
-    [[SurvicateSdk shared] initialize];
-}
-
 RCT_EXPORT_METHOD(initializeSdk)
 {
     [[SurvicateSdk shared] initialize];

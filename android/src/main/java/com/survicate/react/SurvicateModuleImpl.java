@@ -64,11 +64,6 @@ public class SurvicateModuleImpl extends SurvicateModule {
     }
 
     @ReactMethod
-    public void initialize() {
-        Survicate.init(reactContext);
-    }
-
-    @ReactMethod
     public void initializeSdk() {
         Survicate.init(reactContext);
     }
