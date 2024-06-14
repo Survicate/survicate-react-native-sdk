@@ -19,6 +19,7 @@ public class SurvicateModuleImpl extends SurvicateModule {
     private final SurvicateRNEventListener eventListener;
 
     private int listenerCount = 0;
+    private boolean isInitialized = false;
 
     public SurvicateModuleImpl(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -33,16 +34,25 @@ public class SurvicateModuleImpl extends SurvicateModule {
 
     @ReactMethod
     public void enterScreen(String screenName) {
+        if (!isInitialized) {
+            return;
+        }
         Survicate.enterScreen(screenName);
     }
 
     @ReactMethod
     public void leaveScreen(String screenName) {
+        if (!isInitialized) {
+            return;
+        }
         Survicate.leaveScreen(screenName);
     }
 
     @ReactMethod
     public void invokeEvent(String eventName, ReadableMap eventProperties) {
+        if (!isInitialized) {
+            return;
+        }
         Map<String, String> properties = new HashMap<>();
         for (Map.Entry<String, Object> entry : eventProperties.toHashMap().entrySet()) {
             String key = entry.getKey();
@@ -55,21 +65,31 @@ public class SurvicateModuleImpl extends SurvicateModule {
 
     @ReactMethod
     public void setUserId(String userId) {
+        if (!isInitialized) {
+            return;
+        }
         Survicate.setUserTrait(new UserTrait.UserId(userId));
     }
 
     @ReactMethod
     public void setUserTrait(String userTrait, String value) {
+        if (!isInitialized) {
+            return;
+        }
         Survicate.setUserTrait(new UserTrait(userTrait, value));
     }
 
     @ReactMethod
     public void initializeSdk() {
         Survicate.init(reactContext);
+        isInitialized = true;
     }
 
     @ReactMethod
     public void reset() {
+        if (!isInitialized) {
+            return;
+        }
         Survicate.reset();
     }
 
@@ -80,6 +100,9 @@ public class SurvicateModuleImpl extends SurvicateModule {
 
     @ReactMethod
     public void addListener(String eventName) {
+        if (!isInitialized) {
+            return;
+        }
         if (listenerCount == 0) {
             Survicate.addEventListener(eventListener);
         }
@@ -89,6 +112,9 @@ public class SurvicateModuleImpl extends SurvicateModule {
 
     @ReactMethod
     public void removeListeners(int count) {
+        if (!isInitialized) {
+            return;
+        }
         listenerCount -= count;
 
         if (listenerCount == 0) {
