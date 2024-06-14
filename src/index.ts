@@ -14,6 +14,10 @@ export class SurvicateIntegrations {}
 class Survicate {
   static integrations = new SurvicateIntegrations();
 
+  static setWorkspaceKey(workspaceKey: string): void {
+    survicate.setWorkspaceKey(workspaceKey);
+  }
+
   static initializeSdk(): void {
     survicate.initializeSdk();
   }

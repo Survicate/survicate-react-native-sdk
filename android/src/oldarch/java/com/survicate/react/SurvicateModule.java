@@ -17,7 +17,6 @@ public abstract class SurvicateModule extends ReactContextBaseJavaModule {
     public abstract void invokeEvent(String eventName, ReadableMap eventProperties);
     public abstract void setUserId(String userId);
     public abstract void setUserTrait(String userTrait, String value);
-    public abstract void initialize();
     public abstract void initializeSdk();
     public abstract void reset();
     public abstract void setWorkspaceKey(String workspaceKey);
