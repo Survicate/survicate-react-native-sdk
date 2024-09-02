@@ -15,6 +15,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install Dependencies
+        run: yarn
+
       - name: Generate Tarball
         run: |
           npm pack
