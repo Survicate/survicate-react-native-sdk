@@ -27,7 +27,7 @@ jobs:
       - name: Move Tarball to Test App
         run: |
           echo "$TAR_FILE"
-          mv $TAR_FILE test/test_app/$TAR_FILE
+          mv $TAR_FILE test/test_app/survicate.tgz
 
       - name: Navigate to Test App
         run: cd test/test_app
@@ -35,7 +35,7 @@ jobs:
       - name: Install Test App Dependencies
         run: |
           yarn
-          yarn add $TAR_FILE_NAME
+          yarn add survicate.tgz
 
       - name: Navigate to Android
         run: cd android
