@@ -29,11 +29,12 @@ jobs:
           mv $TAR_FILE_NAME  test/test_app/$TAR_FILE_NAME
 
       - name: Navigate to Test App
-        run: cd test/test_app
+        run: |
+          cd test/test_app
+          ls
 
       - name: Install Test App Dependencies
         run: |
-          ls
           yarn
           yarn add ./$TAR_FILE_NAME
 
