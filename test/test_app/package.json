@@ -1,0 +1,30 @@
+{
+  "name": "test_app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-native": "0.75.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@react-native/babel-preset": "0.75.2",
+    "@react-native/metro-config": "0.75.2",
+    "@react-native/typescript-config": "0.75.2"
+  },
+  "peerDependencies": {
+    "@survicate/react-native-survicate": ">=5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

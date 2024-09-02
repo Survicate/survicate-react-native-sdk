@@ -1,0 +1,82 @@
+name: React Native SDK Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Generate Tarball
+        run: |
+          npm pack
+          TAR_FILE=$(ls *.tgz)
+          echo "TAR_FILE_NAME=$TAR_FILE" >> $GITHUB_ENV
+
+      - name: Navigate to Test App
+        run: cd test/test_app
+
+      - name: Install Test App Dependencies
+        run: |
+          yarn
+          yarn add ../../$TAR_FILE_NAME
+
+      - name: Navigate to Android
+        run: cd android
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Setup Android
+        run: chmod +x gradlew    
+
+      - name: Build Android
+        run: ./gradlew assembleRelease
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Start Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: default
+          arch: x86_64
+          profile: Nexus_5X
+          emulator-options: "-no-snapshot-save -no-accel -no-window"\
+
+      - name: Wait for Emulator
+        run: adb wait-for-device
+
+      - name: Unlock Screen
+        run: adb shell input keyevent 82
+
+      - name: Install Release APK
+        run: adb install -r app/build/outputs/apk/release/app-release.apk
+
+      - name: Install Maestro
+        run: curl -Ls "https://get.maestro.mobile.dev" | bash
+
+      - name: Run Maestro
+        working-directory: ../../
+        run: maestro run .maestro/app-flow.yaml
