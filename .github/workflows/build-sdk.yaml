@@ -28,58 +28,61 @@ jobs:
         run: |
           mv $TAR_FILE_NAME  test/test_app/$TAR_FILE_NAME
 
-      - name: Navigate to Test App
-        run: |
-          cd test/test_app
-          ls
-
       - name: Install Test App Dependencies
+        working-directory: test/test_app
         run: |
           yarn
           yarn add ./$TAR_FILE_NAME
 
-      - name: Navigate to Android
-        run: cd android
-
       - name: Setup Java
+        working-directory: test/test_app/android
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Validate Gradle wrapper
+        working-directory: test/test_app/android
         uses: gradle/actions/wrapper-validation@v3
 
       - name: Setup Gradle
+        working-directory: test/test_app/android
         uses: gradle/actions/setup-gradle@v3
 
       - name: Setup Android
+        working-directory: test/test_app/android
         run: chmod +x gradlew    
 
       - name: Build Android
+        working-directory: test/test_app/android
         run: ./gradlew assembleRelease
 
       - name: Enable KVM
+        working-directory: test/test_app/android
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
       - name: Start Emulator
+        working-directory: test/test_app/android
         uses: reactivecircus/android-emulator-runner@v2
 
       - name: Wait for Emulator
+        working-directory: test/test_app/android
         run: adb wait-for-device
 
       - name: Unlock Screen
+        working-directory: test/test_app/android
         run: adb shell input keyevent 82
 
       - name: Install Release APK
+        working-directory: test/test_app/android
         run: adb install -r app/build/outputs/apk/release/app-release.apk
 
       - name: Install Maestro
+        working-directory: test/test_app/android
         run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Run Maestro
-        working-directory: ../../
         run: maestro run .maestro/app-flow.yaml
