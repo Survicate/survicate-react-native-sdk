@@ -33,6 +33,7 @@ jobs:
 
       - name: Install Test App Dependencies
         run: |
+          echo "ls"
           yarn
           yarn add ./$TAR_FILE_NAME
 
