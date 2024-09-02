@@ -54,6 +54,9 @@ jobs:
         working-directory: test/test_app/android
         run: chmod +x gradlew    
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Build Android
         working-directory: test/test_app/android
         run: ./gradlew assembleRelease
@@ -64,12 +67,6 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-
-      - name: Restart ADB
-        working-directory: test/test_app/android
-        run: |
-          adb kill-server
-          adb start-server
 
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
