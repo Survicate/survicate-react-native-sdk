@@ -68,10 +68,17 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: Restart ADB
+        working-directory: test/test_app/android
+        run: |
+          adb kill-server
+          adb start-server
+
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
+          script: ./gradlew connectedCheck
           
       - name: Wait for Emulator
         run: adb wait-for-device
