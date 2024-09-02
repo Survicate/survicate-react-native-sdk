@@ -54,6 +54,9 @@ jobs:
         working-directory: test/test_app/android
         run: chmod +x gradlew    
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Build Android
         working-directory: test/test_app/android
         run: ./gradlew assembleRelease
