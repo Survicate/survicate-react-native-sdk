@@ -27,7 +27,7 @@ jobs:
       - name: Move Tarball to Test App
         run: |
           echo "$TAR_FILE"
-          mv $TAR_FILE test/test_app/survicate.tgz
+          mv $TAR_FILE  test/test_app/survicate.tgz
 
       - name: Navigate to Test App
         run: cd test/test_app
