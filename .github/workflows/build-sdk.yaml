@@ -35,7 +35,6 @@ jobs:
           yarn add ./$TAR_FILE_NAME
 
       - name: Setup Java
-        working-directory: test/test_app/android
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -81,7 +80,6 @@ jobs:
         run: adb install -r app/build/outputs/apk/release/app-release.apk
 
       - name: Install Maestro
-        working-directory: test/test_app/android
         run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Run Maestro
