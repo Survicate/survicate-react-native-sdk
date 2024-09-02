@@ -41,12 +41,14 @@ jobs:
           java-version: '17'
 
       - name: Validate Gradle wrapper
-        working-directory: test/test_app/android
         uses: gradle/actions/wrapper-validation@v3
+        with:
+          working-directory: test/test_app/android
 
       - name: Setup Gradle
-        working-directory: test/test_app/android
         uses: gradle/actions/setup-gradle@v3
+        with:
+          working-directory: test/test_app/android
 
       - name: Setup Android
         working-directory: test/test_app/android
@@ -64,15 +66,12 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Start Emulator
-        working-directory: test/test_app/android
         uses: reactivecircus/android-emulator-runner@v2
 
       - name: Wait for Emulator
-        working-directory: test/test_app/android
         run: adb wait-for-device
 
       - name: Unlock Screen
-        working-directory: test/test_app/android
         run: adb shell input keyevent 82
 
       - name: Install Release APK
