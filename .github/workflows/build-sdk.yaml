@@ -34,7 +34,7 @@ jobs:
       - name: Install Test App Dependencies
         run: |
           yarn
-          yarn add $TAR_FILE_NAME
+          yarn add ./$TAR_FILE_NAME
 
       - name: Navigate to Android
         run: cd android
