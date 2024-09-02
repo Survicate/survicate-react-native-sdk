@@ -25,7 +25,9 @@ jobs:
           echo "TAR_FILE_NAME=$TAR_FILE" >> $GITHUB_ENV
 
       - name: Move Tarball to Test App
-        run: mv $TAR_FILE test/test_app/$TAR_FILE
+        run: |
+          echo "$TAR_FILE"
+          mv $TAR_FILE test/test_app/$TAR_FILE
 
       - name: Navigate to Test App
         run: cd test/test_app
