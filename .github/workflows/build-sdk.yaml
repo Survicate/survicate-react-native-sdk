@@ -24,13 +24,16 @@ jobs:
           TAR_FILE=$(ls *.tgz)
           echo "TAR_FILE_NAME=$TAR_FILE" >> $GITHUB_ENV
 
+      - name: Move Tarball to Test App
+        run: mv $TAR_FILE test/test_app
+
       - name: Navigate to Test App
         run: cd test/test_app
 
       - name: Install Test App Dependencies
         run: |
           yarn
-          yarn add ../../$TAR_FILE_NAME
+          yarn add $TAR_FILE_NAME
 
       - name: Navigate to Android
         run: cd android
