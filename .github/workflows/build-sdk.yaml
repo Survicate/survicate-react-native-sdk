@@ -74,6 +74,7 @@ jobs:
           api-level: 33
           target: google_apis
           arch: x86_64
+          script: test/test_app/android/gradlew :app:installDebug
           
       - name: Wait for Emulator
         run: adb wait-for-device
