@@ -1,4 +1,4 @@
-appId: com.react_native
+appId: com.test_app
 ---
 - launchApp
 - assertVisible: "Invoke Event: Event"
