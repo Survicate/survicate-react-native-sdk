@@ -42,24 +42,16 @@ jobs:
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v3
-        with:
-          working-directory: test/test_app/android
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          working-directory: test/test_app/android
 
       - name: Setup Android
         working-directory: test/test_app/android
         run: chmod +x gradlew    
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Build Android
-        working-directory: test/test_app/android
-        run: ./gradlew assembleRelease
+      - name: Install Maestro
+        run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Enable KVM
         working-directory: test/test_app/android
@@ -74,20 +66,4 @@ jobs:
           api-level: 33
           target: google_apis
           arch: x86_64
-          script: test/test_app/android/gradlew :app:installDebug
-          
-      - name: Wait for Emulator
-        run: adb wait-for-device
-
-      - name: Unlock Screen
-        run: adb shell input keyevent 82
-
-      - name: Install Release APK
-        working-directory: test/test_app/android
-        run: adb install -r app/build/outputs/apk/release/app-release.apk
-
-      - name: Install Maestro
-        run: curl -Ls "https://get.maestro.mobile.dev" | bash
-
-      - name: Run Maestro
-        run: maestro run .maestro/app-flow.yaml
+          script: test/test_app/android/gradlew :app:installDebug; maestro run .maestro/app-flow.yaml
