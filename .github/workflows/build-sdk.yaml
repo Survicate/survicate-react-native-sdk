@@ -66,4 +66,8 @@ jobs:
           api-level: 33
           target: google_apis
           arch: x86_64
-          script: ls; test/test_app/android/gradlew :app:installDebug; maestro run .maestro/app-flow.yaml
+          script: |
+            cd test/test_app/android
+            ./gradlew app:installDebug
+            cd .. && cd .. && cd ..
+            maestro run .maestro/app-flow.yaml            
