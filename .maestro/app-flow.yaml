@@ -1,5 +1,4 @@
 appId: com.react_native
 ---
-flows:
-  - launchApp:
-  - assertVisible: "Invoke Event: Event"
+- launchApp
+- assertVisible: "Invoke Event: Event"
