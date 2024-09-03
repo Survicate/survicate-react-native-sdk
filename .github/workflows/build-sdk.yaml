@@ -51,7 +51,9 @@ jobs:
         run: chmod +x gradlew    
 
       - name: Install Maestro
-        run: curl -fsSL "https://get.maestro.mobile.dev" | bash
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Build APK
         working-directory: test/test_app/android
