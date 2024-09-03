@@ -1,30 +1,30 @@
 import React, { useEffect } from "react";
 import { Button, Text, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
-import Survicate, {SurveyDisplayedEvent, QuestionAnsweredEvent, SurveyClosedEvent, SurveyCompletedEvent, UserTrait} from "@survicate/react-native-survicate";
+// import Survicate, {SurveyDisplayedEvent, QuestionAnsweredEvent, SurveyClosedEvent, SurveyCompletedEvent, UserTrait} from "@survicate/react-native-survicate";
 
 const App = () => {
-  useEffect(() => {
-    // Initialize the SDK
-    Survicate.initializeSdk();
+  // useEffect(() => {
+  //   // Initialize the SDK
+  //   Survicate.initializeSdk();
 
-    const listener = {
-      onSurveyDisplayed: (event: SurveyDisplayedEvent) => {
-        // onSurveyDisplayed
-      },
-      onQuestionAnswered: (event: QuestionAnsweredEvent) => {
-        // onQuestionAnswered
-      },
-      onSurveyClosed: (event: SurveyClosedEvent) => {
-        // onSurveyClosed
-      },
-      onSurveyCompleted: (event: SurveyCompletedEvent) => {
-        // onSurveyCompleted
-      },
-    };
+  //   const listener = {
+  //     onSurveyDisplayed: (event: SurveyDisplayedEvent) => {
+  //       // onSurveyDisplayed
+  //     },
+  //     onQuestionAnswered: (event: QuestionAnsweredEvent) => {
+  //       // onQuestionAnswered
+  //     },
+  //     onSurveyClosed: (event: SurveyClosedEvent) => {
+  //       // onSurveyClosed
+  //     },
+  //     onSurveyCompleted: (event: SurveyCompletedEvent) => {
+  //       // onSurveyCompleted
+  //     },
+  //   };
 
-    const subscription = Survicate.addSurvicateEventListener(listener);
-    return subscription;
-  }, []);
+  //   const subscription = Survicate.addSurvicateEventListener(listener);
+  //   return subscription;
+  // }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -37,7 +37,7 @@ const App = () => {
           <Button
             title="Enter Screen: Home"
             onPress={() => {
-              Survicate.enterScreen("Home");
+              // Survicate.enterScreen("Home");
             }}
           />
         </View>
@@ -46,7 +46,7 @@ const App = () => {
           <Button
             title="Leave Screen: Home"
             onPress={() => {
-              Survicate.leaveScreen("Home");
+              // Survicate.leaveScreen("Home");
             }}
           />
         </View>
@@ -55,7 +55,7 @@ const App = () => {
           <Button
             title="Invoke Event: Event"
             onPress={() => {
-              Survicate.invokeEvent("Event");
+              // Survicate.invokeEvent("Event");
             }}
           />
         </View>
@@ -68,7 +68,7 @@ const App = () => {
                 property1: "value1",
                 property2: "value2",
               };
-              Survicate.invokeEvent("Event", properties);
+              // Survicate.invokeEvent("Event", properties);
             }}
           />
         </View>
@@ -77,8 +77,8 @@ const App = () => {
           <Button
             title="Set User Trait"
             onPress={() => {
-              const trait = new UserTrait('name', 'John');
-              Survicate.setUserTrait(trait);
+              // const trait = new UserTrait('name', 'John');
+              // Survicate.setUserTrait(trait);
             }}
           />
         </View>
@@ -87,7 +87,7 @@ const App = () => {
           <Button
             title="Reset"
             onPress={() => {
-              Survicate.reset();
+              // Survicate.reset();
             }}
           />
         </View>
