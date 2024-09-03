@@ -68,6 +68,7 @@ jobs:
           arch: x86_64
           script: |
             cd test/test_app/android
+            ls
             ./gradlew app:installDebug
             cd .. && cd .. && cd ..
             maestro run .maestro/app-flow.yaml            
