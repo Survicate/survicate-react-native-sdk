@@ -1,114 +1,120 @@
-import React, { useEffect } from "react";
-import { Button, Text, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
-// import Survicate, {SurveyDisplayedEvent, QuestionAnsweredEvent, SurveyClosedEvent, SurveyCompletedEvent, UserTrait} from "@survicate/react-native-survicate";
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
 
-const App = () => {
-  // useEffect(() => {
-  //   // Initialize the SDK
-  //   Survicate.initializeSdk();
+import Survicate from '@survicate/react-native-survicate';
+import React from 'react';
+import type {PropsWithChildren} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from 'react-native';
 
-  //   const listener = {
-  //     onSurveyDisplayed: (event: SurveyDisplayedEvent) => {
-  //       // onSurveyDisplayed
-  //     },
-  //     onQuestionAnswered: (event: QuestionAnsweredEvent) => {
-  //       // onQuestionAnswered
-  //     },
-  //     onSurveyClosed: (event: SurveyClosedEvent) => {
-  //       // onSurveyClosed
-  //     },
-  //     onSurveyCompleted: (event: SurveyCompletedEvent) => {
-  //       // onSurveyCompleted
-  //     },
-  //   };
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-  //   const subscription = Survicate.addSurvicateEventListener(listener);
-  //   return subscription;
-  // }, []);
+
+type SectionProps = PropsWithChildren<{
+  title: string;
+}>;
+
+function Section({children, title}: SectionProps): React.JSX.Element {
+  Survicate.initializeSdk();
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
+
+function App(): React.JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>
-          Example App
-        </Text>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Enter Screen: Home"
-            onPress={() => {
-              // Survicate.enterScreen("Home");
-            }}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Leave Screen: Home"
-            onPress={() => {
-              // Survicate.leaveScreen("Home");
-            }}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Invoke Event: Event"
-            onPress={() => {
-              // Survicate.invokeEvent("Event");
-            }}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Invoke Event with Properties: Event"
-            onPress={() => {
-              const properties = {
-                property1: "value1",
-                property2: "value2",
-              };
-              // Survicate.invokeEvent("Event", properties);
-            }}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Set User Trait"
-            onPress={() => {
-              // const trait = new UserTrait('name', 'John');
-              // Survicate.setUserTrait(trait);
-            }}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Reset"
-            onPress={() => {
-              // Survicate.reset();
-            }}
-          />
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
   },
-  scrollView: {
-    padding: 20,
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
   },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
   },
-  buttonContainer: {
-    marginBottom: 10,
+  highlight: {
+    fontWeight: '700',
   },
 });
 
