@@ -1,4 +1,4 @@
-appId: "com.react_native"
+appId: com.react_native
 ---
 flows:
   - launchApp:
