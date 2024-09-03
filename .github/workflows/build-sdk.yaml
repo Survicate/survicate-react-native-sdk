@@ -51,7 +51,7 @@ jobs:
         run: chmod +x gradlew    
 
       - name: Install Maestro
-        run: curl -Ls "https://get.maestro.mobile.dev" | bash
+        run: curl -fsSL "https://get.maestro.mobile.dev" | bash
 
       - name: Build APK
         working-directory: test/test_app/android
