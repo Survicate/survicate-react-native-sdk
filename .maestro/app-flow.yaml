@@ -1,4 +1,5 @@
 appId: com.test_app
 ---
 - launchApp
+- takeScreenshot: ExampleApp
 - assertVisible: "Example App"
