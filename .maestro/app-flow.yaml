@@ -1,4 +1,4 @@
 appId: com.test_app
 ---
 - launchApp
-- assertVisible: "Invoke Event: Event"
+- assertVisible: "Example App"
