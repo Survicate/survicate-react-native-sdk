@@ -21,9 +21,7 @@
     "@react-native/metro-config": "0.75.2",
     "@react-native/typescript-config": "0.75.2"
   },
-  "peerDependencies": {
-    "@survicate/react-native-survicate": ">=5.0.0"
-  },
+  "peerDependencies": {},
   "engines": {
     "node": ">=18"
   }

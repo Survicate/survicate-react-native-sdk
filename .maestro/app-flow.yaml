@@ -2,4 +2,4 @@ appId: com.test_app
 ---
 - launchApp
 - takeScreenshot: ExampleApp
-- assertVisible: ExampleApp
+- tapOn: "Invoke Event: Event"
