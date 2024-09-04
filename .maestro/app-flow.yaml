@@ -1,5 +1,5 @@
 appId: com.test_app
 ---
 - launchApp
-- takeScreenshot: ExampleApp
 - tapOn: "Invoke Event: Event"
+- takeScreenshot: ExampleApp
