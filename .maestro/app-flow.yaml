@@ -1,5 +1,7 @@
 appId: com.test_app
 ---
 - launchApp
-- tapOn: "Invoke Event: Event"
+- extentedWaitUntil:
+    visible: Example App
+    timeout: 30000
 - takeScreenshot: ExampleApp
