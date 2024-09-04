@@ -2,6 +2,6 @@ appId: com.test_app
 ---
 - launchApp
 - extendedWaitUntil:
-    visible: "Example App"
+    notVisible: "Example App"
     timeout: 30000  
 - takeScreenshot: ExampleApp
