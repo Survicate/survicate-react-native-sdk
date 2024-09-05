@@ -23,5 +23,4 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["src/NativeSurvicateModule.ts"]
 }
