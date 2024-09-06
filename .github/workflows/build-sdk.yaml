@@ -55,6 +55,12 @@ jobs:
           curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
+      - name: Bundle JS
+        working-directory: test/test_app
+        run: |
+          npx react-native bundle --platform android --dev true --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+
+
       - name: Build APK
         working-directory: test/test_app/android
         run: |
