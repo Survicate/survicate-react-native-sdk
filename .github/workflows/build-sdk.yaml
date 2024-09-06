@@ -58,7 +58,7 @@ jobs:
       - name: Bundle JS
         working-directory: test/test_app
         run: |
-          npx react-native bundle --platform android --dev true --entry-file index.js --bundle-output home/runner/work/survicate-react-native-sdk/survicate-react-native-sdk/android/app/src/main/assets/index.android.bundle --assets-dest home/runner/work/survicate-react-native-sdk/survicate-react-native-sdk/android/app/src/main/res
+          npx react-native start
 
 
       - name: Build APK
