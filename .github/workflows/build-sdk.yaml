@@ -70,10 +70,10 @@ jobs:
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 33
+          api-level: 26
           target: google_apis
-          arch: x86_64
-          emulator-options: -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          arch: default
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
             adb install -r test/test_app/android/app/build/outputs/apk/debug/app-debug.apk
             maestro test .maestro/app-flow.yaml --format junit
