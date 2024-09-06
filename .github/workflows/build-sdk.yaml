@@ -74,9 +74,9 @@ jobs:
           target: google_apis
           arch: x86
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-port: 8081
           script: |
             adb install -r test/test_app/android/app/build/outputs/apk/debug/app-debug.apk
-            npm start
             maestro test .maestro/app-flow.yaml --format junit
             ls -R /home/runner/work/survicate-react-native-sdk
 
