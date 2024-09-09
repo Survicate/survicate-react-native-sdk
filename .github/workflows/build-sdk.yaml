@@ -56,10 +56,10 @@ jobs:
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Build APK
-        working-directory: test/test_app
+        working-directory: test/test_app/android
         run: |
-          mkdir -p android/app/src/main/assets
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+          mkdir -p app/src/main/assets
+          cd .. && npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
           ./android/gradlew app:assembleDebug
 
       - name: Enable KVM
