@@ -64,7 +64,7 @@ jobs:
       - name: Build APK
         working-directory: test/test_app/android
         run: |
-          ./gradlew app:assembleDebug
+          ./gradlew app:assembleRelease
 
       - name: Enable KVM
         working-directory: test/test_app/android
@@ -81,9 +81,8 @@ jobs:
           arch: x86_64
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
-            adb install -r test/test_app/android/app/build/outputs/apk/debug/app-debug.apk
+            adb install -r test/test_app/android/app/build/outputs/apk/debug/app-release.apk
             maestro test .maestro/app-flow.yaml --format junit
-            ls -R /home/runner/work/survicate-react-native-sdk
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
