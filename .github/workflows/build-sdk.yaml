@@ -64,7 +64,7 @@ jobs:
       - name: Build APK
         working-directory: test/test_app/android
         run: |
-          ./android/gradlew app:assembleDebug
+          ./gradlew app:assembleDebug
 
       - name: Enable KVM
         working-directory: test/test_app/android
