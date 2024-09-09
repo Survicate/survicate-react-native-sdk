@@ -81,7 +81,7 @@ jobs:
           arch: x86_64
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
-            adb install -r test/test_app/android/app/build/outputs/apk/debug/app-release.apk
+            adb install -r test/test_app/android/app/build/outputs/apk/release/app-release.apk
             maestro test .maestro/app-flow.yaml --format junit
 
       - name: Upload test results
