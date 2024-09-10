@@ -35,4 +35,3 @@ jobs:
         with:
           name: $SURVICATE
           path: test/test_app/$TARBALL_NAME
-"
