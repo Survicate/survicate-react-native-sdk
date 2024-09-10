@@ -67,6 +67,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Setup Android
+        working-directory: test/test_app/android
         run: chmod +x gradlew    
 
       - name: Build APK
