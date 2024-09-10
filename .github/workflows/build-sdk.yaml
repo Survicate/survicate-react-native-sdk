@@ -1,4 +1,4 @@
-name: Build React Native SDK 
+name: Build React Native SDK
 
 on: [push]
 
