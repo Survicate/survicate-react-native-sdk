@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: survicate
-          path: test/test_app/siurvicate_sdk.tgz
+          path: test/test_app/survicate_sdk.tgz
