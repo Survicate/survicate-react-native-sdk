@@ -1,10 +1,12 @@
-name: React Native SDK Build
+name: Build React Native SDK 
 
 on: [push]
 
 jobs:
-  build-sdk:
+  build-react-native-sdk:
     runs-on: ubuntu-latest
+    outputs:
+      tarball-name: ${{ steps.generate-tarball.tarball-name }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,106 +21,16 @@ jobs:
           yarn
 
       - name: Generate Tarball
+        id: generate-tarball
         run: |
           npm pack
-          TAR_FILE=$(ls *.tgz)
-          mv $TAR_FILE test/test_app/survicate.tgz
+          TARBALL_NAME=$(ls *.tgz)
+          mv $TARBALL_NAME test/test_app/$TARBALL_NAME
+          echo "tarball-name=$TARBALL_NAME" >> "$GITHUB_OUTPUT"
 
       - name: Upload Survicate SDK Tarball
         uses: actions/upload-artifact@v4
         with:
           name: survicate
-          path: test/test_app/survicate.tgz
-
-  build-android-app:
-    runs-on: ubuntu-latest
-    needs: build-sdk
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Download Survicate SDK Tarball
-        uses: actions/download-artifact@v4
-        with:
-          name: survicate
-          path: test/test_app
-
-      - name: Install Test App Dependencies
-        working-directory: test/test_app
-        run: |
-          yarn
-          yarn add ./survicate.tgz
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Setup Android
-        working-directory: test/test_app/android
-        run: chmod +x gradlew    
-
-      - name: Build APK
-        working-directory: test/test_app/android
-        run: |
-          ./gradlew app:assembleRelease
-
-      - name: Upload Android APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk
-          path: test/test_app/android/app/build/outputs/apk/release/app-release.apk
-
-   
-  run-android-tests:
-    runs-on: ubuntu-latest
-    needs: build-android-app
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Install Maestro
-        run: |
-          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
-          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
-
-      - name: Enable KVM
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-
-      - name: Download Android APK
-        uses: actions/download-artifact@v4
-        with:
-          name: android-apk
-
-      - name: Start Emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          target: google_apis
-          arch: x86_64
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics
-          script: |
-            adb install -r app-release.apk
-            maestro test .maestro/app-flow.yaml --format junit
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: maestro-results
-          path: /home/runner/work/survicate-react-native-sdk/survicate-react-native-sdk/ExampleApp.png
-          retention-days: 3         
+          path: test/test_app/${{ steps.generate-tarball.outputs.tarball-name }}
+"
