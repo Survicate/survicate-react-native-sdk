@@ -111,10 +111,9 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics
           script: |
-            ls -R
-            adb install -r android-apk.apk
+            adb install -r app-release.apk
             maestro test .maestro/app-flow.yaml --format junit
 
       - name: Upload test results
