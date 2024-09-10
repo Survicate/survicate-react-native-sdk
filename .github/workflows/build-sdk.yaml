@@ -2,11 +2,13 @@ name: Build React Native SDK
 
 on: [push]
 
+env :
+  SURVICATE_SDK: survicate_sdk.tgz
+  SURVICATE: survicate
+
 jobs:
   build-react-native-sdk:
     runs-on: ubuntu-latest
-    outputs:
-      tarball-name: ${{ steps.generate-tarball.tarball-name }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,12 +27,12 @@ jobs:
         run: |
           npm pack
           TARBALL_NAME=$(ls *.tgz)
-          mv $TARBALL_NAME test/test_app/$TARBALL_NAME
-          echo "tarball-name=$TARBALL_NAME" >> "$GITHUB_OUTPUT"
+          mv $TARBALL_NAME test/test_app/$SURVICATE_SDK
+          echo "TARBALL_NAME=$SURVICATE_SDK" >> $GITHUB_ENV
 
       - name: Upload Survicate SDK Tarball
         uses: actions/upload-artifact@v4
         with:
-          name: survicate
-          path: test/test_app/${{ steps.generate-tarball.outputs.tarball-name }}
+          name: $SURVICATE
+          path: test/test_app/$TARBALL_NAME
 "
