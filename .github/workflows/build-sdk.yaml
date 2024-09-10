@@ -3,9 +3,8 @@ name: React Native SDK Build
 on: [push]
 
 jobs:
-  build:
+  build-sdk:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -18,21 +17,37 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Generate Tarball
+      - name: Generate and Move Tarball
         run: |
           npm pack
           TAR_FILE=$(ls *.tgz)
           echo "TAR_FILE_NAME=$TAR_FILE" >> $GITHUB_ENV
+          mv $TAR_FILE test/test_app/$TAR_FILE
 
-      - name: Move Tarball to Test App
-        run: |
-          mv $TAR_FILE_NAME  test/test_app/$TAR_FILE_NAME
+  setup-test-app:
+    runs-on: ubuntu-latest
+    needs: build-sdk
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
       - name: Install Test App Dependencies
         working-directory: test/test_app
         run: |
           yarn
-          yarn add ./$TAR_FILE_NAME
+          yarn add ${{ needs.build-sdk.outputs.TAR_FILE_PATH }}
+
+  build-android:
+    runs-on: ubuntu-latest
+    needs: setup-test-app
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -47,21 +62,26 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Setup Android
-        working-directory: test/test_app/android
         run: chmod +x gradlew    
-
-      - name: Install Maestro
-        run: |
-          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
-          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Build APK
         working-directory: test/test_app/android
         run: |
           ./gradlew app:assembleRelease
 
+  run-android-tests:
+    runs-on: ubuntu-latest
+    needs: build-android
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Maestro
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+
       - name: Enable KVM
-        working-directory: test/test_app/android
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
