@@ -12,7 +12,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Dependencies 
         run: |
@@ -25,7 +25,7 @@ jobs:
           mv $TAR_FILE test/test_app/survicate.tgz
 
       - name: Upload Survicate SDK Tarball
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: survicate
           path: test/test_app/survicate.tgz
@@ -40,10 +40,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Download Survicate SDK Tarball
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: survicate
           path: test/test_app
@@ -76,7 +76,7 @@ jobs:
           ./gradlew app:assembleRelease
 
       - name: Upload Android APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android-apk
           path: test/test_app/android/app/build/outputs/apk/release/app-release.apk
@@ -101,7 +101,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Download Android APK
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: android-apk
 
