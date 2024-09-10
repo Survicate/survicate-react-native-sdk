@@ -28,13 +28,13 @@ jobs:
         run: |
           npm pack
           TARBALL_NAME=$(ls *.tgz)
-          mv $TARBALL_NAME test/test_app/$SURVICATE_SDK
+          mv $TARBALL_NAME test/test_app/${{ env.SURVICATE_SDK }}
 
       - name: Upload Survicate SDK Tarball
         uses: actions/upload-artifact@v4
         with:
-          name: $SURVICATE
-          path: test/test_app/$SURVICATE_SDK
+          name: ${{ env.SURVICATE }}
+          path: test/test_app/${{ env.SURVICATE_SDK }}
 
   build-android-app:
     runs-on: ubuntu-latest
@@ -51,14 +51,14 @@ jobs:
       - name: Download Survicate SDK Tarball
         uses: actions/download-artifact@v4
         with:
-          name: $SURVICATE
+          name: ${{ env.SURVICATE }}
           path: test/test_app
 
       - name: Install Test App Dependencies
         working-directory: test/test_app
         run: |
           yarn
-          yarn add ./$SURVICATE_SDK
+          yarn add ./${{ env.SURVICATE_SDK }}
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -84,8 +84,8 @@ jobs:
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: $ANDROID
-          path: test/test_app/android/app/build/outputs/apk/release/$ANDROID_APK
+          name: ${{ env.ANDROID }}
+          path: test/test_app/android/app/build/outputs/apk/release/${{ env.ANDROID_APK }}
 
    
   run-android-tests:
@@ -109,7 +109,7 @@ jobs:
       - name: Download Android APK
         uses: actions/download-artifact@v4
         with:
-          name: $ANDROID
+          name: ${{ env.ANDROID }}
 
       - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -119,7 +119,7 @@ jobs:
           arch: x86_64
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics
           script: |
-            adb install -r $ANDROID_APK
+            adb install -r ${{ env.ANDROID_APK }}
             maestro test .maestro/app-flow.yaml --format junit
 
       - name: Upload test results
