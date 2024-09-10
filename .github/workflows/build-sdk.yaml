@@ -113,6 +113,7 @@ jobs:
           arch: x86_64
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
+            ls -R
             adb install -r android-apk.apk
             maestro test .maestro/app-flow.yaml --format junit
 
