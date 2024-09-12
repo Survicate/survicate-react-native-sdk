@@ -60,8 +60,7 @@ jobs:
 
       - name: Install CocoaPods
         run: |
-          sudo gem install cocoapods
-          pod setup
+          bundle install
 
       - name: Install CocoaPods Dependencies
         working-directory: test/test_app/ios
