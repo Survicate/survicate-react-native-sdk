@@ -1,6 +1,7 @@
 name: Test Android App
 
-on: [push]
+# Revert to push when iOS is ready
+on: [workflow_dispatch] 
 
 env :
   SURVICATE_SDK: survicate_sdk.tgz
