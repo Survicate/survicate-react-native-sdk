@@ -8,7 +8,7 @@ env :
 
 jobs:
   build-react-native-sdk:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -50,6 +50,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.SURVICATE }}
+
+      - name: List files
+        working-directory: test/test_app
+        run: |
+          ls -R
 
       - name: Install Test App Dependencies
         working-directory: test/test_app
