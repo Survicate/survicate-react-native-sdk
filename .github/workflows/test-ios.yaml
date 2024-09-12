@@ -59,6 +59,7 @@ jobs:
           yarn add ./${{ env.SURVICATE_SDK }}
 
       - name: Install CocoaPods
+        working-directory: test/test_app
         run: |
           bundle install
 
