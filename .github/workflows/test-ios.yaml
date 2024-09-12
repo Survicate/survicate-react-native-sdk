@@ -52,7 +52,6 @@ jobs:
           name: ${{ env.SURVICATE }}
 
       - name: List files
-        working-directory: test/test_app
         run: |
           ls -R
 
