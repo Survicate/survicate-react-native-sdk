@@ -71,4 +71,4 @@ jobs:
       - name: Build iOS App
         working-directory: test/test_app/ios
         run: |
-          xcodebuild -workspace ExampleApp.xcworkspace -scheme ExampleApp -sdk iphonesimulator
+          xcodebuild -workspace test_app.xcworkspace -scheme test_app -sdk iphonesimulator
