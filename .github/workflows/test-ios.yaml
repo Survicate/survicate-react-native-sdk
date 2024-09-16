@@ -78,7 +78,7 @@ jobs:
             -scheme test_app \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
-            -configuration Debug \
+            -configuration Release \
             -derivedDataPath ios/build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             -quiet
