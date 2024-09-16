@@ -68,6 +68,10 @@ jobs:
         run: |
           NO_FLIPPER=1 bundle exec pod install
 
+      - name: List files
+        working-directory: ios
+        run: ls -R
+
       - name: Build App for Simulator in Release Mode without Code Signing
         env:
           RCT_NO_LAUNCH_PACKAGER: 'true'
