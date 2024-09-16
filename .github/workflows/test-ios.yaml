@@ -73,8 +73,8 @@ jobs:
           RCT_NO_LAUNCH_PACKAGER: 'true'
         run: |
           xcodebuild \
-            -workspace ios/YourApp.xcworkspace \
-            -scheme YourAppScheme \
+            -workspace ios/test_app.xcworkspace \
+            -scheme test_app \
             -sdk iphonesimulator \
             -configuration Release \
             -derivedDataPath ios/build \
@@ -93,7 +93,7 @@ jobs:
 
       - name: Install App on Simulator
         run: |
-          xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/YourApp.app
+          xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/test_app.app
 
       - name: Install Maestro
         run: |
