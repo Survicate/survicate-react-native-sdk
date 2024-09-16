@@ -97,7 +97,7 @@ jobs:
           sleep 10
 
       - name: Install App on Simulator
-      working-directory: test/test_app
+        working-directory: test/test_app
         run: |
           xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/test_app.app
 
