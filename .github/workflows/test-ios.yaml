@@ -68,7 +68,41 @@ jobs:
         run: |
           NO_FLIPPER=1 bundle exec pod install
 
-      - name: Build iOS App
-        working-directory: test/test_app/ios
+      - name: Build App for Simulator in Release Mode without Code Signing
+        env:
+          RCT_NO_LAUNCH_PACKAGER: 'true'
         run: |
-          xcodebuild -workspace test_app.xcworkspace -scheme test_app -sdk iphonesimulator
+          xcodebuild \
+            -workspace ios/YourApp.xcworkspace \
+            -scheme YourAppScheme \
+            -sdk iphonesimulator \
+            -configuration Release \
+            -derivedDataPath ios/build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            -quiet
+
+      - name: List files
+        working-directory: ios
+        run: ls -R
+
+      - name: Boot iOS Simulator
+        run: |
+          xcrun simctl boot "iPhone 14"
+          # Wait for the simulator to boot
+          sleep 10
+
+      - name: Install App on Simulator
+        run: |
+          xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/YourApp.app
+
+      - name: Install Maestro
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Run Maestro Tests
+        run: maestro test .maestro/app-flow.yaml --format junit
+
+      - name: Shutdown Simulator
+        if: always()
+        run: xcrun simctl shutdown all
