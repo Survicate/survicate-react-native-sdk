@@ -1,4 +1,4 @@
-appId: com.test_app
+appId: org.reactjs.native.example.test-app
 ---
 - launchApp
 - assertVisible: "Example App"
