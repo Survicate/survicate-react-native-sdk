@@ -69,10 +69,11 @@ jobs:
           NO_FLIPPER=1 bundle exec pod install
 
       - name: List files
-        working-directory: ios
+        working-directory: test/test_app/ios
         run: ls -R
 
       - name: Build App for Simulator in Release Mode without Code Signing
+        working-directory: test/test_app
         env:
           RCT_NO_LAUNCH_PACKAGER: 'true'
         run: |
@@ -86,7 +87,7 @@ jobs:
             -quiet
 
       - name: List files
-        working-directory: ios
+        working-directory: test/test_app/ios
         run: ls -R
 
       - name: Boot iOS Simulator
@@ -96,6 +97,7 @@ jobs:
           sleep 10
 
       - name: Install App on Simulator
+      working-directory: test/test_app
         run: |
           xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/test_app.app
 
