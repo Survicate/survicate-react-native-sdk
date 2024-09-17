@@ -24,9 +24,7 @@ jobs:
         working-directory: test/react_native
         run: |
           echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
-
-      - name: List Files
-        run: ls -Ra
+          echo "API_KEY=${ secrets.WORKSPACE_KEY }}" >> $GITHUB_ENV
 
       - name: Install Dependencies 
         run: |
