@@ -66,7 +66,7 @@ jobs:
       - name: Install CocoaPods Dependencies
         working-directory: test/test_app/ios
         run: |
-          NO_FLIPPER=1 bundle exec pod install
+          bundle install && RCT_NEW_ARCH_ENABLED=1 && NO_FLIPPER=1 bundle exec pod install
 
       - name: Build App for Simulator in Release Mode without Code Signing
         working-directory: test/test_app
@@ -101,16 +101,6 @@ jobs:
 
       - name: Run Maestro Tests
         run: maestro test .maestro/app-flow.yaml --format junit
-
-      - name: List files
-        run: ls -R
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: maestro-results
-          path: ./ExampleApp.png
-          retention-days: 3   
 
       - name: Shutdown Simulator
         if: always()
