@@ -20,7 +20,7 @@ const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text style={styles.title}>Example App</Text>
+        <Text style={styles.title}>Test App</Text>
 
         <View style={styles.buttonContainer}>
           <Button
