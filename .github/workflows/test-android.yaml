@@ -26,7 +26,7 @@ jobs:
           echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
 
       - name: List Files
-        run: ls -R
+        run: ls -Ra
 
       - name: Install Dependencies 
         run: |
