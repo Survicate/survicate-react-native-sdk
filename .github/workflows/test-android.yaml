@@ -26,7 +26,6 @@ jobs:
           echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
 
       - name: List Files
-        working-directory: test/react_native
         run: ls -R
 
       - name: Install Dependencies 
