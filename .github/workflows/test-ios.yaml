@@ -68,6 +68,11 @@ jobs:
         run: |
           bundle install && RCT_NEW_ARCH_ENABLED=1 && NO_FLIPPER=1 bundle exec pod install
 
+      - name: Install Maestro
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+
       - name: Build App for Simulator in Release Mode without Code Signing
         working-directory: test/react_native
         env:
@@ -87,17 +92,12 @@ jobs:
         run: |
           xcrun simctl boot "iPhone 14"
           # Wait for the simulator to boot
-          sleep 30
+          sleep 10
 
       - name: Install App on Simulator
         working-directory: test/react_native
         run: |
           xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/react_native.app
-
-      - name: Install Maestro
-        run: |
-          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
-          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Run Maestro Tests
         run: |
