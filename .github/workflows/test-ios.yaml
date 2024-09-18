@@ -103,6 +103,10 @@ jobs:
         with:
           name: ${{ env.IOS }}
 
+      - name: List files
+        run: |
+          ls -R
+
       - name: Boot iOS Simulator
         run: |
           xcrun simctl boot "iPhone 14"
