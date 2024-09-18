@@ -100,7 +100,9 @@ jobs:
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Run Maestro Tests
-        run: maestro test .maestro/test-show-survey-ios.yaml --format junit
+        run: |
+          export MAESTRO_DRIVER_STARTUP_TIMEOUT=60000
+          maestro test .maestro/test-show-survey-ios.yaml --format junit
 
       - name: Shutdown Simulator
         if: always()
