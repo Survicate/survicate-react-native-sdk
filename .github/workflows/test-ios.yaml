@@ -1,0 +1,107 @@
+name: Test iOS App
+
+on: [push]
+
+env :
+  SURVICATE_SDK: survicate_sdk.tgz
+  SURVICATE: survicate
+
+jobs:
+  build-react-native-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies 
+        run: |
+          yarn
+
+      - name: Generate Tarball
+        run: |
+          npm pack
+          TARBALL_NAME=$(ls *.tgz)
+          mv $TARBALL_NAME test/react_native/${{ env.SURVICATE_SDK }}
+
+      - name: Upload Survicate SDK Tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.SURVICATE }}
+          path: test/react_native/${{ env.SURVICATE_SDK }}
+
+  build-and-test-ios-app:
+    runs-on: macos-latest
+    needs: build-react-native-sdk
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download Survicate SDK Tarball
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.SURVICATE }}
+          path: test/react_native
+
+      - name: Install Test App Dependencies
+        working-directory: test/react_native
+        run: |
+          yarn
+          yarn add ./${{ env.SURVICATE_SDK }}
+
+      - name: Install CocoaPods
+        working-directory: test/react_native
+        run: |
+          bundle install
+
+      - name: Install CocoaPods Dependencies
+        working-directory: test/react_native/ios
+        run: |
+          bundle install && RCT_NEW_ARCH_ENABLED=1 && NO_FLIPPER=1 bundle exec pod install
+
+      - name: Build App for Simulator in Release Mode without Code Signing
+        working-directory: test/react_native
+        env:
+          RCT_NO_LAUNCH_PACKAGER: 'true'
+        run: |
+          xcodebuild \
+            -workspace ios/react_native.xcworkspace \
+            -scheme react_native \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
+            -configuration Release \
+            -derivedDataPath ios/build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            -quiet
+
+      - name: Boot iOS Simulator
+        run: |
+          xcrun simctl boot "iPhone 14"
+          # Wait for the simulator to boot
+          sleep 10
+
+      - name: Install App on Simulator
+        working-directory: test/react_native
+        run: |
+          xcrun simctl install booted ios/build/Build/Products/Release-iphonesimulator/react_native.app
+
+      - name: Install Maestro
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Run Maestro Tests
+        run: maestro test .maestro/app-flow.yaml --format junit
+
+      - name: Shutdown Simulator
+        if: always()
+        run: xcrun simctl shutdown all
