@@ -5,7 +5,7 @@ on: [push]
 env :
   SURVICATE_SDK: survicate_sdk.tgz
   SURVICATE: survicate
-  IOS_APP: test_app.app
+  IOS_APP: react_native.app
   IOS: ios-app
 
 jobs:
@@ -84,10 +84,6 @@ jobs:
             -derivedDataPath ios/build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             -quiet
-
-      - name: List files
-        run: |
-          ls -R
 
       - name: Upload iOS APP
         uses: actions/upload-artifact@v4
