@@ -28,13 +28,13 @@ jobs:
         run: |
           npm pack
           TARBALL_NAME=$(ls *.tgz)
-          mv $TARBALL_NAME test/test_app/${{ env.SURVICATE_SDK }}
+          mv $TARBALL_NAME test/react_native/${{ env.SURVICATE_SDK }}
 
       - name: Upload Survicate SDK Tarball
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.SURVICATE }}
-          path: test/test_app/${{ env.SURVICATE_SDK }}
+          path: test/react_native/${{ env.SURVICATE_SDK }}
 
   build-ios-app:
     runs-on: macos-latest
@@ -93,7 +93,7 @@ jobs:
 
   run-ios-test:
     runs-on: macos-latest
-    needs: build-react-native-sdk
+    needs: build-ios-app
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
