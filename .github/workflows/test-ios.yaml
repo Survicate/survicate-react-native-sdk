@@ -87,7 +87,7 @@ jobs:
         run: |
           xcrun simctl boot "iPhone 14"
           # Wait for the simulator to boot
-          sleep 10
+          sleep 30
 
       - name: Install App on Simulator
         working-directory: test/react_native
@@ -100,7 +100,7 @@ jobs:
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Run Maestro Tests
-        run: maestro test .maestro/app-flow.yaml --format junit
+        run: maestro test .maestro/test-show-survey.yaml --format junit
 
       - name: Shutdown Simulator
         if: always()
