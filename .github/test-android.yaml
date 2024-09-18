@@ -1,0 +1,135 @@
+name: Test Android App
+
+on: [push] 
+
+env :
+  SURVICATE_SDK: survicate_sdk.tgz
+  SURVICATE: survicate
+  ANDROID_APK: app-release.apk
+  ANDROID: android-apk
+
+jobs:
+  build-react-native-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies 
+        run: |
+          yarn
+
+      - name: Generate Tarball
+        run: |
+          npm pack
+          TARBALL_NAME=$(ls *.tgz)
+          mv $TARBALL_NAME test/react_native/${{ env.SURVICATE_SDK }}
+
+      - name: Upload Survicate SDK Tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.SURVICATE }}
+          path: test/react_native/${{ env.SURVICATE_SDK }}
+
+  build-android-app:
+    runs-on: ubuntu-latest
+    needs: build-react-native-sdk
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download Survicate SDK Tarball
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.SURVICATE }}
+          path: test/react_native
+
+      - name: Install Test App Dependencies
+        working-directory: test/react_native
+        run: |
+          yarn
+          yarn add ./${{ env.SURVICATE_SDK }}
+
+      - name: Setup Workspace Key
+        working-directory: test/react_native
+        run: |
+          echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Setup Android
+        working-directory: test/react_native/android
+        run: chmod +x gradlew    
+
+      - name: Build APK
+        working-directory: test/react_native/android
+        run: |
+          ./gradlew app:assembleRelease
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ANDROID }}
+          path: test/react_native/android/app/build/outputs/apk/release/${{ env.ANDROID_APK }}
+
+   
+  run-android-tests:
+    runs-on: ubuntu-latest
+    needs: build-android-app
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Maestro
+        run: |
+          curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Download Android APK
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ANDROID }}
+
+      - name: Start Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics
+          script: |
+            adb install -r ${{ env.ANDROID_APK }}
+            maestro test .maestro/test-show-survey.yaml --format junit
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: maestro-results
+          path: /home/runner/work/survicate-react-native-sdk/survicate-react-native-sdk/TestAppSurvey.png
+          retention-days: 3         

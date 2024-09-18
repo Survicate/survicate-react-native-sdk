@@ -1,0 +1,7 @@
+appId: com.react_native
+---
+- launchApp
+- assertVisible: "Test App"
+- tapOn: "Invoke Event: Event"
+- assertVisible: "Welcome to our Survey!"
+- takeScreenshot: TestAppSurvey
