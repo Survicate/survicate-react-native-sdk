@@ -116,7 +116,7 @@ jobs:
         with:
           name: ${{ env.ANDROID }}
 
-      - name: Start Emulator
+      - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
@@ -126,10 +126,4 @@ jobs:
           script: |
             adb install -r ${{ env.ANDROID_APK }}
             maestro test .maestro/test-show-survey.yaml --format junit
-
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: maestro-results
-          path: /home/runner/work/survicate-react-native-sdk/survicate-react-native-sdk/TestAppSurvey.png
-          retention-days: 3         
+    
