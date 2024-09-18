@@ -125,5 +125,5 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -no-metrics
           script: |
             adb install -r ${{ env.ANDROID_APK }}
-            maestro test .maestro/test-show-survey.yaml --format junit
+            maestro test .maestro/test-show-survey-android.yaml --format junit
     

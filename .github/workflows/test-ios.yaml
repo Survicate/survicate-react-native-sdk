@@ -100,7 +100,7 @@ jobs:
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Run Maestro Tests
-        run: maestro test .maestro/test-show-survey.yaml --format junit
+        run: maestro test .maestro/test-show-survey-ios.yaml --format junit
 
       - name: Shutdown Simulator
         if: always()
