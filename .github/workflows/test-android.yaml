@@ -24,12 +24,6 @@ jobs:
         working-directory: test/react_native
         run: |
           echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
-          echo "WORKSPACE_KEY set with length: $(wc -c < .env)"
-
-      - name: Read File Content
-        working-directory: test/react_native
-        run: |
-          cat .env
 
       - name: Install Dependencies 
         run: |
