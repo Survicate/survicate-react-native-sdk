@@ -10,7 +10,7 @@ env :
 
 jobs:
   build-react-native-sdk:
-    runs-on: ubuntu-latest
+    runs-on: macos
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -52,32 +52,32 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.SURVICATE }}
-          path: test/test_app
+          path: test/react_native
 
       - name: Install Test App Dependencies
-        working-directory: test/test_app
+        working-directory: test/react_native
         run: |
           yarn
           yarn add ./${{ env.SURVICATE_SDK }}
 
       - name: Install CocoaPods
-        working-directory: test/test_app
+        working-directory: test/react_native
         run: |
           bundle install
 
       - name: Install CocoaPods Dependencies
-        working-directory: test/test_app/ios
+        working-directory: test/react_native/ios
         run: |
           bundle install && RCT_NEW_ARCH_ENABLED=1 && NO_FLIPPER=1 bundle exec pod install
 
       - name: Build App for Simulator in Release Mode without Code Signing
-        working-directory: test/test_app
+        working-directory: test/react_native
         env:
           RCT_NO_LAUNCH_PACKAGER: 'true'
         run: |
           xcodebuild \
-            -workspace ios/test_app.xcworkspace \
-            -scheme test_app \
+            -workspace ios/react_native.xcworkspace \
+            -scheme react_native \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
             -configuration Release \
@@ -89,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.IOS }}
-          path: test/test_app/ios/build/Build/Products/Release-iphonesimulator/${{ env.IOS_APP }}
+          path: test/react_native/ios/build/Build/Products/Release-iphonesimulator/${{ env.IOS_APP }}
 
   run-ios-test:
     runs-on: macos-latest
@@ -102,7 +102,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.IOS }}
-          path: test/test_app/ios
+          path: test/react_native/ios
 
       - name: Boot iOS Simulator
         run: |
@@ -111,7 +111,7 @@ jobs:
           sleep 30
 
       - name: Install App on Simulator
-        working-directory: test/test_app
+        working-directory: test/react_native
         run: |
           xcrun simctl install booted ios/${{ env.IOS_APP }}
 
