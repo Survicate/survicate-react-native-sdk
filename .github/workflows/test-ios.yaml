@@ -110,7 +110,6 @@ jobs:
           sleep 30
 
       - name: Install App on Simulator
-        working-directory: test/react_native
         run: |
           xcrun simctl install booted ${{ env.IOS_APP }}
 
