@@ -71,7 +71,11 @@ jobs:
       - name: Install Maestro
         run: |
           curl -Ls --retry 3 --retry-all-errors "https://get.maestro.mobile.dev" | bash
+          brew tap facebook/fb
+          brew install facebook/fb/idb-companion
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
+        env:
+          MAESTRO_VERSION: '1.33.1'
 
       - name: Build App for Simulator in Release Mode without Code Signing
         working-directory: test/react_native
