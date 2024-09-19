@@ -123,7 +123,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maestro-results
-          path: .maestro/tests
+          path: ./TestApp.png
           retention-days: 3   
 
       - name: Shutdown Simulator
