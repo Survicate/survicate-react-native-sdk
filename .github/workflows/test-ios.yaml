@@ -114,6 +114,7 @@ jobs:
           maestro test .maestro/test-show-survey-ios.yaml --format junit
 
       - name: Upload test results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: maestro-results
