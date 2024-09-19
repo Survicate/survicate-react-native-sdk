@@ -80,7 +80,7 @@ jobs:
           brew install facebook/fb/idb-companion
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
         env:
-          MAESTRO_VERSION: '1.33.1'
+          MAESTRO_VERSION: '1.39-dev.2'
 
       - name: Build App for Simulator in Release Mode without Code Signing
         working-directory: test/react_native
