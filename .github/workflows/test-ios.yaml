@@ -58,6 +58,11 @@ jobs:
           yarn
           yarn add ./${{ env.SURVICATE_SDK }}
 
+      - name: Setup Workspace Key
+        working-directory: test/react_native
+        run: |
+          echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
+
       - name: Install CocoaPods
         working-directory: test/react_native
         run: |
