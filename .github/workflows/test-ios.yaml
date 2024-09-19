@@ -118,7 +118,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maestro-results
-          path: /home/runner/.maestro/tests
+          path: .maestro/tests
           retention-days: 3   
 
       - name: Shutdown Simulator
