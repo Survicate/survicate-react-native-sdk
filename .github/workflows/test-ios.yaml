@@ -111,7 +111,7 @@ jobs:
       - name: Run Maestro Tests
         run: |
           export MAESTRO_DRIVER_STARTUP_TIMEOUT=60000
-          maestro test .maestro/test-show-survey-ios.yaml --format junit
+          maestro test .maestro/test-show-survey-ios.yaml --format junit ios
 
       - name: List files
         if: always()
