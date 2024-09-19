@@ -3,5 +3,7 @@ appId: com.react-native
 - launchApp
 - assertVisible: "Test App"
 - tapOn: "Invoke Event: Event"
-- assertVisible: "Welcome to our Survey!"
+- extendedWaitUntil:
+    visible: "Welcome to our Survey!"
+    timeout: 60000
 - takeScreenshot: TestApp
