@@ -114,6 +114,7 @@ jobs:
           maestro test .maestro/test-show-survey-ios.yaml --format junit
 
       - name: List files
+        if: always()
         run: |
           ls -R
 
