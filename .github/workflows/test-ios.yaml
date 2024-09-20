@@ -81,26 +81,30 @@ jobs:
           brew install facebook/fb/idb-companion
           echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
-      - name: Build App for Simulator in Release Mode without Code Signing
-        working-directory: test/react_native
-        env:
-          RCT_NO_LAUNCH_PACKAGER: 'true'
-        run: |
-          xcodebuild \
-            -workspace ios/react_native.xcworkspace \
-            -scheme react_native \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
-            -configuration Release \
-            -derivedDataPath ios/build \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
-            -quiet
+      # - name: Build App for Simulator in Release Mode without Code Signing
+      #   working-directory: test/react_native
+      #   env:
+      #     RCT_NO_LAUNCH_PACKAGER: 'true'
+      #   run: |
+      #     xcodebuild \
+      #       -workspace ios/react_native.xcworkspace \
+      #       -scheme react_native \
+      #       -sdk iphonesimulator \
+      #       -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.0' \
+      #       -configuration Release \
+      #       -derivedDataPath ios/build \
+      #       CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+      #       -quiet
 
       - name: Boot iOS Simulator
         run: |
           xcrun simctl boot "iPhone 15"
           # Wait for the simulator to boot
           sleep 10
+
+      - name: Verify Internet Access in Simulator
+        run: |
+          xcrun simctl spawn booted curl -I https://www.google.com
 
       - name: Install App on Simulator
         working-directory: test/react_native
@@ -111,11 +115,6 @@ jobs:
         run: |
           export MAESTRO_DRIVER_STARTUP_TIMEOUT=60000
           maestro test .maestro/test-show-survey-ios.yaml --format junit
-
-      - name: List files
-        if: always()
-        run: |
-          ls -Ra
 
       - name: Upload test results
         if: always()
