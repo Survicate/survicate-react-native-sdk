@@ -104,7 +104,7 @@ jobs:
 
       - name: Verify Internet Access in Simulator
         run: |
-          xcrun simctl spawn booted curl -I https://www.google.com
+          xcrun simctl spawn booted curl --connect-timeout 10 --max-time 10 -I https://www.google.com
 
       - name: Install App on Simulator
         working-directory: test/react_native
