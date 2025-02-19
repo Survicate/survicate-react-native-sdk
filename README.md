@@ -3,7 +3,7 @@
 Integrate Survicate into your React Native application to collect user feedback seamlessly.
 
 ## Requirements:
-- iOS at least on version 12.0
+- iOS at least on version 14.0
 - Android at least on version 5
 - React Native at least on version 0.60.0
 

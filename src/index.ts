@@ -37,6 +37,9 @@ class Survicate {
     survicate.leaveScreen(screenName);
   }
 
+  /**
+   * @deprecated Use setUserTrait(userTrait: UserTrait) method with `user_id' UserTrait instead.
+   */
   static setUserId(userId: string): void {
     survicate.setUserId(userId);
   }

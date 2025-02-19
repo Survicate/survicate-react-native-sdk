@@ -68,7 +68,8 @@ public class SurvicateModuleImpl extends SurvicateModule {
         if (!isInitialized) {
             return;
         }
-        Survicate.setUserTrait(new UserTrait.UserId(userId));
+
+        Survicate.setUserTrait(new UserTrait("user_id", userId));
     }
 
     @ReactMethod
