@@ -14,14 +14,14 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
   s.authors      = { "Survicate" => "help@survicate.com" }
-  s.platforms    = { :ios => "10.0" }
+  s.platforms    = { :ios => "14.0" }
   s.source       = { :git => "https://github.com/Survicate/survicate-react-native-sdk.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,mm,swift}"
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "Survicate", "6.0.0"
+  s.dependency "Survicate", "6.1.0"
   # ...
   # s.dependency "..."
   
