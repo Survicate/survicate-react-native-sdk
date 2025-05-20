@@ -140,7 +140,19 @@ class Survicate {
       onSurveyClosedListener.remove();
     };
   }
-
+  
+  /**
+   * Sets the preferred locale used for survey translations and targeting filters.
+   * The specified locale takes priority over the device's default locale.
+   *
+   * This method affects only the Survicate SDK and does not change in any way the app locale settings.
+   *
+   * @param locale An IETF language tag such as:
+   * - Two-letter ISO 639 language code (e.g., "en", "fr")
+   * - Three-letter ISO 639 language code for languages without the two-letter code (e.g., "haw", "yue")
+   * - Language with region (e.g., "en-US", "pt-BR")
+   * - Language with script (e.g., "zh-Hans")
+   */
   static setLocale(locale: string): void {
     survicate.setLocale(locale);
   }
