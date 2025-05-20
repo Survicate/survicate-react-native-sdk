@@ -127,4 +127,12 @@ public class SurvicateModuleImpl extends SurvicateModule {
     public void removeListeners(double count) {
         removeListeners((int) count);
     }
+
+    @ReactMethod
+    public void setLocale(String locale) {
+        if (!isInitialized) {
+            return;
+        }
+        Survicate.setLocale(locale);
+    }
 }

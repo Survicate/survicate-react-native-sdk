@@ -12,6 +12,7 @@ export interface Spec extends TurboModule {
   reset(): void;
   addListener(eventName: string): void;
   removeListeners(count: number): void;
+  setLocale(locale: string): void;
 }
 
 export default TurboModuleRegistry.get<Spec>("SurvicateBindings");

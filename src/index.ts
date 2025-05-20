@@ -140,6 +140,10 @@ class Survicate {
       onSurveyClosedListener.remove();
     };
   }
+
+  static setLocale(locale: string): void {
+    survicate.setLocale(locale);
+  }
 }
 
 export class UserTrait {
