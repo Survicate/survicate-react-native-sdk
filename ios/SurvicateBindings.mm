@@ -54,6 +54,10 @@ RCT_EXPORT_METHOD(setWorkspaceKey:(NSString *)workspaceKey)
     [[SurvicateSdk shared] setWorkspaceKey:workspaceKey error: &error];
 }
 
+RCT_EXPORT_METHOD(setLocale:(NSString *)locale)
+{
+    [[SurvicateSdk shared] setLocale:locale];
+}
 
 - (NSArray<NSString*> *)supportedEvents {
     return @[@"onQuestionAnswered", @"onSurveyClosed", @"onSurveyCompleted", @"onSurveyDisplayed"];
