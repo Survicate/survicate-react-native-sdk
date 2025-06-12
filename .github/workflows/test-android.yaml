@@ -1,6 +1,10 @@
 name: Test Android App
 
-on: [push] 
+on: [push]
+
+permissions:
+  contents: read
+  actions: read
 
 env :
   SURVICATE_SDK: survicate_sdk.tgz
