@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "6.3.2",
+  "version": "6.3.3",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -41,7 +41,7 @@
     "react-native",
     "expo"
   ],
-  "author": "Survicate <hello@survicate.com> (https://survicate.com/)",
+  "author": "Survicate <support@survicate.com> (https://survicate.com/)",
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
