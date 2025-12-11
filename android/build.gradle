@@ -120,7 +120,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation ('com.survicate:survicate-sdk:6.4.2')
+    implementation ('com.survicate:survicate-sdk:6.4.3')
 }
 
 if (isNewArchitectureEnabled()) {
