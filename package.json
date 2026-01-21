@@ -66,7 +66,7 @@
     "expo": "^54.0.31",
     "react": "^19.2.3",
     "react-native": "^0.83.1",
-    "react-native-builder-bob": "^0.40.17",
+    "react-native-builder-bob": "^0.23.1",
     "typescript": "^5.9.3"
   },
   "react-native-builder-bob": {
