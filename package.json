@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "6.4.6",
+  "version": "7.0.0",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -59,15 +59,15 @@
     }
   },
   "devDependencies": {
-    "@tsconfig/react-native": "^3.0.2",
+    "@tsconfig/react-native": "^3.0.9",
     "@types/jest": "^29.5.4",
-    "@types/react": "^18.2.21",
-    "@types/react-test-renderer": "^18.0.1",
-    "expo": "^52.0.15",
-    "react": "18.2.0",
-    "react-native": "0.72.6",
-    "react-native-builder-bob": "^0.23.1",
-    "typescript": "5.2.2"
+    "@types/react": "^19.2.8",
+    "@types/react-test-renderer": "^19.1.0",
+    "expo": "^54.0.31",
+    "react": "^19.2.3",
+    "react-native": "^0.83.1",
+    "react-native-builder-bob": "^0.40.17",
+    "typescript": "^5.9.3"
   },
   "react-native-builder-bob": {
     "exclude": "**/NativeSurvicateModule.ts",
