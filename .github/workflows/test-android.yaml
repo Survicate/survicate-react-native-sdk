@@ -1,6 +1,11 @@
 name: Test Android App
 
-on: [push]
+on:
+  push:
+  workflow_call:
+    secrets:
+      WORKSPACE_KEY:
+        required: true
 
 permissions:
   contents: read
