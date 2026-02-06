@@ -12,6 +12,9 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/test-android.yaml
+    permissions:
+      contents: read
+      actions: read
     secrets:
       WORKSPACE_KEY: ${{ secrets.WORKSPACE_KEY }}
 
