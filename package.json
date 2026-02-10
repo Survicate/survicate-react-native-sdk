@@ -70,7 +70,6 @@
     "typescript": "^5.9.3"
   },
   "react-native-builder-bob": {
-    "exclude": "**/NativeSurvicateModule.ts",
     "source": "src",
     "output": "lib",
     "targets": [
