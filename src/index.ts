@@ -156,6 +156,15 @@ class Survicate {
   static setLocale(languageTag: string): void {
     survicate.setLocale(languageTag);
   }
+
+  /**
+   * Sets the theme mode for survey appearance.
+   *
+   * @param themeMode The theme mode to apply: ThemeMode.light, ThemeMode.dark, or ThemeMode.auto (default).
+   */
+  static setThemeMode(themeMode: ThemeMode): void {
+    survicate.setThemeMode(themeMode);
+  }
 }
 
 export class UserTrait {
@@ -226,6 +235,12 @@ export interface SurvicateEventListener {
   onQuestionAnswered?: (event: QuestionAnsweredEvent) => void;
   onSurveyCompleted?: (event: SurveyCompletedEvent) => void;
   onSurveyClosed?: (event: SurveyClosedEvent) => void;
+}
+
+export enum ThemeMode {
+  light = "light",
+  dark = "dark",
+  auto = "auto",
 }
 
 export default Survicate;

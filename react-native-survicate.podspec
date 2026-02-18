@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "Survicate", "7.0.0"
+  s.dependency "Survicate", "7.1.1"
   # ...
   # s.dependency "..."
   

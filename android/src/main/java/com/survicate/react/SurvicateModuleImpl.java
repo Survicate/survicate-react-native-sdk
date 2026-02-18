@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.survicate.surveys.Survicate;
+import com.survicate.surveys.ThemeMode;
 import com.survicate.surveys.traits.UserTrait;
 
 import com.survicate.react.SurvicateModule;
@@ -134,5 +135,25 @@ public class SurvicateModuleImpl extends SurvicateModule {
             return;
         }
         Survicate.setLocale(locale);
+    }
+
+    @ReactMethod
+    public void setThemeMode(String themeMode) {
+        if (!isInitialized) {
+            return;
+        }
+        ThemeMode mode;
+        switch (themeMode) {
+            case "light":
+                mode = ThemeMode.LIGHT;
+                break;
+            case "dark":
+                mode = ThemeMode.DARK;
+                break;
+            default:
+                mode = ThemeMode.AUTO;
+                break;
+        }
+        Survicate.setThemeMode(mode);
     }
 }
