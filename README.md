@@ -103,7 +103,7 @@ const booleanTrait = new UserTrait('isPremium', true);
 const dateTrait = new UserTrait('lastLogin', new Date());
 const timeIntervalTrait = new UserTrait('timeOfPurchase', new Date());
 Survicate.setLocale('en-US');
-Survicate.setThemeMode(ThemeMode.auto) /* ThemeMode.auto, ThemeMode.light, ThemeMode.dark */
+Survicate.setThemeMode(ThemeMode.auto); /* ThemeMode.auto, ThemeMode.light, ThemeMode.dark */
 const listener: SurvicateEventListener = {
     onSurveyDisplayed(event: SurveyDisplayedEvent) {},
     onQuestionAnswered(event: QuestionAnsweredEvent) {},
