@@ -59,6 +59,17 @@ RCT_EXPORT_METHOD(setLocale:(NSString *)locale)
     [[SurvicateSdk shared] setLocale:locale];
 }
 
+RCT_EXPORT_METHOD(setThemeMode:(NSString *)themeMode)
+{
+    ThemeMode mode = ThemeModeAuto;
+    if ([themeMode isEqualToString:@"light"]) {
+        mode = ThemeModeLight;
+    } else if ([themeMode isEqualToString:@"dark"]) {
+        mode = ThemeModeDark;
+    }
+    [[SurvicateSdk shared] setThemeMode:mode];
+}
+
 - (NSArray<NSString*> *)supportedEvents {
     return @[@"onQuestionAnswered", @"onSurveyClosed", @"onSurveyCompleted", @"onSurveyDisplayed"];
 }

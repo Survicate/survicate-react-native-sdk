@@ -21,4 +21,5 @@ public abstract class SurvicateModule extends ReactContextBaseJavaModule {
     public abstract void reset();
     public abstract void setWorkspaceKey(String workspaceKey);
     public abstract void setLocale(String locale);
+    public abstract void setThemeMode(String themeMode);
 }
