@@ -145,7 +145,6 @@ const listener: SurvicateEventListener = {
   onSurveyCompleted(event: SurveyCompletedEvent) {},
 };
 const removeListener = Survicate.addSurvicateEventListener(listener);
-removeListener();
 
 // Reset
 Survicate.reset();
