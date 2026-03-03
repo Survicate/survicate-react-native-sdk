@@ -14,6 +14,8 @@ export interface Spec extends TurboModule {
   removeListeners(count: number): void;
   setLocale(locale: string): void;
   setThemeMode(themeMode: string): void;
+  setFonts(fontSystem: Object): void;
+  setResponseAttributes(attributes: ReadonlyArray<{ name: string; value: string; provider: string | null }>): void;
 }
 
 export default TurboModuleRegistry.get<Spec>("SurvicateBindings");

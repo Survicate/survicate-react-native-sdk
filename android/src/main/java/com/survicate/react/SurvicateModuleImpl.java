@@ -2,13 +2,19 @@ package com.survicate.react;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.survicate.surveys.ResponseAttribute;
 import com.survicate.surveys.Survicate;
 import com.survicate.surveys.ThemeMode;
+import com.survicate.surveys.FontSource;
+import com.survicate.surveys.SurvicateFontSystem;
 import com.survicate.surveys.traits.UserTrait;
 
 import com.survicate.react.SurvicateModule;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -135,6 +141,34 @@ public class SurvicateModuleImpl extends SurvicateModule {
             return;
         }
         Survicate.setLocale(locale);
+    }
+
+    @ReactMethod
+    public void setResponseAttributes(ReadableArray attributes) {
+        if (!isInitialized) {
+            return;
+        }
+        List<ResponseAttribute> list = new ArrayList<>();
+        for (int i = 0; i < attributes.size(); i++) {
+            ReadableMap map = attributes.getMap(i);
+            String name = map.getString("name");
+            String value = map.getString("value");
+            String provider = map.hasKey("provider") && !map.isNull("provider")
+                ? map.getString("provider") : null;
+            list.add(new ResponseAttribute(name, value, provider));
+        }
+        Survicate.setResponseAttributes(list);
+    }
+
+    @ReactMethod
+    public void setFonts(ReadableMap fontSystem) {
+        SurvicateFontSystem fonts = new SurvicateFontSystem(
+            new FontSource.AssetPath(fontSystem.getString("regular")),
+            new FontSource.AssetPath(fontSystem.getString("regularItalic")),
+            new FontSource.AssetPath(fontSystem.getString("bold")),
+            new FontSource.AssetPath(fontSystem.getString("boldItalic"))
+        );
+        Survicate.setFonts(fonts);
     }
 
     @ReactMethod

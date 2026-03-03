@@ -1,5 +1,30 @@
 #import "SurvicateBindings.h"
 #import <Survicate/Survicate-Swift.h>
+#import <CoreText/CoreText.h>
+
+static NSString* postScriptNameForPath(NSString *relativePath)
+{
+    // Build absolute path to the font file inside the app bundle
+    NSString *fullPath = [[NSBundle mainBundle].bundlePath
+        stringByAppendingPathComponent:[relativePath lastPathComponent]];
+
+    NSURL *fontURL = [NSURL fileURLWithPath:fullPath];
+
+    // Read font descriptors from the file to extract metadata
+    CFArrayRef descriptors = CTFontManagerCreateFontDescriptorsFromURL((__bridge CFURLRef)fontURL);
+    if (!descriptors || CFArrayGetCount(descriptors) == 0) {
+        if (descriptors) CFRelease(descriptors);
+        return @"";
+    }
+
+    // Extract the PostScript name from the first font face in the file
+    CTFontDescriptorRef descriptor = (CTFontDescriptorRef)CFArrayGetValueAtIndex(descriptors, 0);
+    NSString *postScriptName = (__bridge_transfer NSString *)
+        CTFontDescriptorCopyAttribute(descriptor, kCTFontNameAttribute);
+    CFRelease(descriptors);
+    
+    return postScriptName ?: @"";
+}
 
 @implementation SurvicateBindings
 {
@@ -59,6 +84,19 @@ RCT_EXPORT_METHOD(setLocale:(NSString *)locale)
     [[SurvicateSdk shared] setLocale:locale];
 }
 
+RCT_EXPORT_METHOD(setResponseAttributes:(NSArray *)attributes)
+{
+    NSMutableArray<ResponseAttribute *> *list = [NSMutableArray array];
+    for (NSDictionary *dict in attributes) {
+        NSString *name = dict[@"name"];
+        NSString *value = dict[@"value"];
+        NSString *provider = dict[@"provider"] == [NSNull null] ? nil : dict[@"provider"];
+        ResponseAttribute *attr = [[ResponseAttribute alloc] initWithName:name value:value provider:provider];
+        [list addObject:attr];
+    }
+    [[SurvicateSdk shared] setResponseAttributes:list];
+}
+
 RCT_EXPORT_METHOD(setThemeMode:(NSString *)themeMode)
 {
     ThemeMode mode = ThemeModeAuto;
@@ -68,6 +106,16 @@ RCT_EXPORT_METHOD(setThemeMode:(NSString *)themeMode)
         mode = ThemeModeDark;
     }
     [[SurvicateSdk shared] setThemeMode:mode];
+}
+
+RCT_EXPORT_METHOD(setFonts:(NSDictionary *)fontSystem)
+{
+    SurvicateFontSystem *fonts = [[SurvicateFontSystem alloc]
+        initWithRegular:postScriptNameForPath(fontSystem[@"regular"])
+        regularItalic:postScriptNameForPath(fontSystem[@"regularItalic"])
+        bold:postScriptNameForPath(fontSystem[@"bold"])
+        boldItalic:postScriptNameForPath(fontSystem[@"boldItalic"])];
+    [[SurvicateSdk shared] setFonts:fonts];
 }
 
 - (NSArray<NSString*> *)supportedEvents {

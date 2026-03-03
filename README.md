@@ -83,34 +83,70 @@ allprojects {
 
 ## Usage
 ```javascript
-import Survicate, {UserTrait, ThemeMode} from '@survicate/react-native-survicate';
+import Survicate, {
+  UserTrait,
+  ThemeMode,
+  ResponseAttribute,
+  SurvicateFontSystem,
+  SurvicateEventListener,
+  SurveyDisplayedEvent,
+  QuestionAnsweredEvent,
+  SurveyClosedEvent,
+  SurveyCompletedEvent,
+} from '@survicate/react-native-survicate';
 
-Survicate.initializeSdk();
+// Initialization
 Survicate.setWorkspaceKey('WORKSPACE_KEY');
+Survicate.initializeSdk();
+
+// Events
 Survicate.invokeEvent("eventName");
-const properties = {
-  "property1": "value1",
-  "property2": "value2"
-};
-Survicate.invokeEvent("eventName", properties);
+Survicate.invokeEvent("eventName", { property1: "value1", property2: "value2" });
+
+// Screens
 Survicate.enterScreen("screenName");
 Survicate.leaveScreen("screenName");
-const userIdTrait = new UserTrait('user_id', 'id');
-Survicate.setUserTrait(userIdTrait);
-const textTrait = new UserTrait('name', 'John');
-const numberTrait = new UserTrait('age', 25);
-const booleanTrait = new UserTrait('isPremium', true);
-const dateTrait = new UserTrait('lastLogin', new Date());
-const timeIntervalTrait = new UserTrait('timeOfPurchase', new Date());
+
+// User traits
+Survicate.setUserTrait(new UserTrait('user_id', 'id'));
+Survicate.setUserTrait(new UserTrait('name', 'John'));
+Survicate.setUserTrait(new UserTrait('age', 25));
+Survicate.setUserTrait(new UserTrait('isPremium', true));
+Survicate.setUserTrait(new UserTrait('lastLogin', new Date()));
+
+// Locale
 Survicate.setLocale('en-US');
-Survicate.setThemeMode(ThemeMode.auto); /* ThemeMode.auto, ThemeMode.light, ThemeMode.dark */
+
+// Theme
+Survicate.setThemeMode(ThemeMode.auto); // ThemeMode.auto | ThemeMode.light | ThemeMode.dark
+
+// Custom Fonts
+Survicate.setFonts({
+  regular: 'fonts/MyFont-Regular.ttf',
+  regularItalic: 'fonts/MyFont-RegularItalic.ttf',
+  bold: 'fonts/MyFont-Bold.ttf',
+  boldItalic: 'fonts/MyFont-BoldItalic.ttf',
+});
+
+// Response attributes
+Survicate.setResponseAttribute(new ResponseAttribute('plan', 'premium'));
+Survicate.setResponseAttributes([
+  new ResponseAttribute('plan', 'premium'),
+  new ResponseAttribute('seats', 10),
+  new ResponseAttribute('isEnterprise', true),
+  new ResponseAttribute('renewalDate', new Date()),
+]);
+
+// Event listeners
 const listener: SurvicateEventListener = {
-    onSurveyDisplayed(event: SurveyDisplayedEvent) {},
-    onQuestionAnswered(event: QuestionAnsweredEvent) {},
-    onSurveyClosed(event: SurveyClosedEvent) {},
-    onSurveyCompleted(event: SurveyCompletedEvent) {},
-}
-const subscription = Survicate.addSurvicateEventListener(listener);
+  onSurveyDisplayed(event: SurveyDisplayedEvent) {},
+  onQuestionAnswered(event: QuestionAnsweredEvent) {},
+  onSurveyClosed(event: SurveyClosedEvent) {},
+  onSurveyCompleted(event: SurveyCompletedEvent) {},
+};
+const removeListener = Survicate.addSurvicateEventListener(listener);
+
+// Reset
 Survicate.reset();
 ```
 

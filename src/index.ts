@@ -165,6 +165,58 @@ class Survicate {
   static setThemeMode(themeMode: ThemeMode): void {
     survicate.setThemeMode(themeMode);
   }
+
+  /**
+   * Sets custom fonts for use in surveys.
+   *
+   * @param fontSystem A font configuration to apply.
+   */
+  static setFonts(fontSystem: SurvicateFontSystem): void {
+    survicate.setFonts(fontSystem);
+  }
+
+  /**
+   * Shorthand version of {@link setResponseAttributes}.
+   */
+  static setResponseAttribute(attribute: ResponseAttribute): void {
+    survicate.setResponseAttributes([{
+      name: attribute.name,
+      value: attribute.value,
+      provider: attribute.provider ?? null,
+    }]);
+  }
+
+  /**
+   * Sets response attributes that will be attached to survey responses.
+   *
+   * These can be arbitrary key-value pairs. Unlike {@link UserTrait}s, response attributes
+   * are session-scoped and are cleared upon a new app session. Response attributes are sent
+   * to the system along with the user's answers to survey questions.
+   *
+   * To change a {@link ResponseAttribute} send the same key with a different value.
+   */
+  static setResponseAttributes(attributes: ResponseAttribute[]): void {
+    const mapped = attributes.map((a) => ({
+      name: a.name,
+      value: a.value,
+      provider: a.provider ?? null,
+    }));
+    survicate.setResponseAttributes(mapped);
+  }
+}
+
+function formatDateToTimeZoneIso(date: Date): string {
+  const offset = date.getTimezoneOffset();
+  const offsetHours = Math.floor(Math.abs(offset) / 60);
+  const offsetMinutes = Math.abs(offset) % 60;
+  date = new Date(date.getTime() - offset * 60 * 1000);
+  return (
+    date.toISOString().slice(0, -5) +
+    (offset > 0 ? "-" : "+") +
+    offsetHours.toString().padStart(2, "0") +
+    ":" +
+    offsetMinutes.toString().padStart(2, "0")
+  );
 }
 
 export class UserTrait {
@@ -179,24 +231,10 @@ export class UserTrait {
     this.key = key;
 
     if (value instanceof Date) {
-      this.value = this.formatDateToTimeZoneIso(value);
+      this.value = formatDateToTimeZoneIso(value);
     } else {
       this.value = value.toString();
     }
-  }
-
-  private formatDateToTimeZoneIso(date: Date): string {
-    const offset = date.getTimezoneOffset();
-    const offsetHours = Math.floor(Math.abs(offset) / 60);
-    const offsetMinutes = Math.abs(offset) % 60;
-    date = new Date(date.getTime() - offset * 60 * 1000);
-    return (
-      date.toISOString().slice(0, -5) +
-      (offset > 0 ? "-" : "+") +
-      offsetHours.toString().padStart(2, "0") +
-      ":" +
-      offsetMinutes.toString().padStart(2, "0")
-    );
   }
 }
 
@@ -241,6 +279,54 @@ export enum ThemeMode {
   light = "light",
   dark = "dark",
   auto = "auto",
+}
+
+/**
+ * Represents a complete set of fonts used by the SDK.
+ *
+ * @property regular Standard font for normal body text.
+ * @property regularItalic Standard font with italic slant.
+ * @property bold Bold style font for emphasized content.
+ * @property boldItalic Bold style font with italic slant.
+ */
+export type SurvicateFontSystem = {
+  regular: string;
+  regularItalic: string;
+  bold: string;
+  boldItalic: string;
+};
+
+/**
+ * Represents a response attribute attached to a survey response.
+ *
+ * @property name The attribute identifier.
+ * @property value The attribute value.
+ * @property provider Optional source or provider of the attribute.
+ */
+export class ResponseAttribute {
+  name: string;
+  value: string;
+  provider?: string;
+
+  constructor(
+    name: string,
+    value: string | number | boolean | Date,
+    provider?: string
+  ) {
+    if (name === null || value === null) {
+      throw new Error("Name and value cannot be null");
+    }
+
+    this.name = name;
+
+    if (value instanceof Date) {
+      this.value = formatDateToTimeZoneIso(value);
+    } else {
+      this.value = value.toString();
+    }
+
+    this.provider = provider;
+  }
 }
 
 export default Survicate;

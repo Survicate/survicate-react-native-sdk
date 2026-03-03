@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 
 public abstract class SurvicateModule extends ReactContextBaseJavaModule {
@@ -22,4 +23,6 @@ public abstract class SurvicateModule extends ReactContextBaseJavaModule {
     public abstract void setWorkspaceKey(String workspaceKey);
     public abstract void setLocale(String locale);
     public abstract void setThemeMode(String themeMode);
+    public abstract void setFonts(ReadableMap fontSystem);
+    public abstract void setResponseAttributes(ReadableArray attributes);
 }
