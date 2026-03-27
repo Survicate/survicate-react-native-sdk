@@ -33,8 +33,6 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>RCTNewArchEnabled</key>
-	<true/>
 	<key>Survicate</key>
 	<dict>
 		<key>WorkspaceKey</key>
