@@ -1748,7 +1748,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - SocketRocket
-  - react-native-survicate (7.2.0):
+  - react-native-survicate (7.3.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1776,7 +1776,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - SocketRocket
-    - Survicate (= 7.2.0)
+    - Survicate (= 7.3.0)
     - Yoga
   - React-NativeModulesApple (0.81.4):
     - boost
@@ -2284,7 +2284,7 @@ PODS:
     - React-utils (= 0.81.4)
     - SocketRocket
   - SocketRocket (0.7.1)
-  - Survicate (7.2.0)
+  - Survicate (7.3.0)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2556,7 +2556,7 @@ SPEC CHECKSUMS:
   React-logger: a3cb5b29c32b8e447b5a96919340e89334062b48
   React-Mapbuffer: 9d2434a42701d6144ca18f0ca1c4507808ca7696
   React-microtasksnativemodule: 75b6604b667d297292345302cc5bfb6b6aeccc1b
-  react-native-survicate: 498e63442d513f2daccc6429eb66cb3810098701
+  react-native-survicate: 4d86bde81f75867aadf5875d3e1ca1b98f0e1d2e
   React-NativeModulesApple: 879fbdc5dcff7136abceb7880fe8a2022a1bd7c3
   React-oscompat: 93b5535ea7f7dff46aaee4f78309a70979bdde9d
   React-perflogger: 5536d2df3d18fe0920263466f7b46a56351c0510
@@ -2588,7 +2588,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 1d05923ad119796be9db37830d5e5dc76586aa00
   ReactCommon: 394c6b92765cf6d211c2c3f7f6bc601dffb316a6
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Survicate: f03ce3df12e822334a0920f503ed30f9cf2a72f4
+  Survicate: a8735f5c5c230f89347f1b278c8784c370de35c1
   Yoga: a3ed390a19db0459bd6839823a6ac6d9c6db198d
 
 PODFILE CHECKSUM: e52418cddec425c0777d1c359f23118e3b873928
