@@ -40,7 +40,7 @@ jobs:
           mv $TARBALL_NAME test/react_native/${{ env.SURVICATE_SDK }}
 
       - name: Upload Survicate SDK Tarball
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ env.SURVICATE }}
           path: test/react_native/${{ env.SURVICATE_SDK }}
@@ -58,7 +58,7 @@ jobs:
           node-version: '22'
 
       - name: Download Survicate SDK Tarball
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.SURVICATE }}
           path: test/react_native
@@ -71,20 +71,22 @@ jobs:
 
       - name: Setup Workspace Key
         working-directory: test/react_native
+        env:
+          WORKSPACE_KEY: ${{ secrets.WORKSPACE_KEY }}
         run: |
-          echo "WORKSPACE_KEY=${{ secrets.WORKSPACE_KEY }}" > .env
+          echo "WORKSPACE_KEY=$WORKSPACE_KEY" > .env
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v4
+        uses: gradle/actions/wrapper-validation@v5
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Setup Android
         working-directory: test/react_native/android
@@ -96,7 +98,7 @@ jobs:
           ./gradlew app:assembleRelease
 
       - name: Upload Android APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ env.ANDROID }}
           path: test/react_native/android/app/build/outputs/apk/release/${{ env.ANDROID_APK }}
@@ -121,7 +123,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Download Android APK
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.ANDROID }}
 
