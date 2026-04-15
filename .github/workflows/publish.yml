@@ -35,7 +35,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          # Pinned to 22.22.1 — Node 22.22.2 ships a broken npm bundle
+          # (missing promise-retry) which breaks `npm install -g npm@latest`.
+          # See: https://github.com/nodejs/node/issues/62430
+          node-version: '22.22.1'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm for trusted publishing support
