@@ -1748,7 +1748,9 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - SocketRocket
-  - react-native-survicate (7.3.0):
+  - react-native-safe-area-context (5.7.0):
+    - React-Core
+  - react-native-survicate (8.0.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -1776,7 +1778,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - SocketRocket
-    - Survicate (= 7.3.0)
+    - Survicate (= 8.0.0)
     - Yoga
   - React-NativeModulesApple (0.81.4):
     - boost
@@ -2284,7 +2286,7 @@ PODS:
     - React-utils (= 0.81.4)
     - SocketRocket
   - SocketRocket (0.7.1)
-  - Survicate (7.3.0)
+  - Survicate (8.0.0)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2329,6 +2331,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-survicate (from `../../..`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-oscompat (from `../node_modules/react-native/ReactCommon/oscompat`)
@@ -2450,6 +2453,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-survicate:
     :path: "../../.."
   React-NativeModulesApple:
@@ -2556,21 +2561,22 @@ SPEC CHECKSUMS:
   React-logger: a3cb5b29c32b8e447b5a96919340e89334062b48
   React-Mapbuffer: 9d2434a42701d6144ca18f0ca1c4507808ca7696
   React-microtasksnativemodule: 75b6604b667d297292345302cc5bfb6b6aeccc1b
-  react-native-survicate: 4d86bde81f75867aadf5875d3e1ca1b98f0e1d2e
+  react-native-safe-area-context: e89848fc12d32ccca63d0d7d16dd96918d07c730
+  react-native-survicate: e5195107520d087816dc50734f77020a4a2765c7
   React-NativeModulesApple: 879fbdc5dcff7136abceb7880fe8a2022a1bd7c3
   React-oscompat: 93b5535ea7f7dff46aaee4f78309a70979bdde9d
   React-perflogger: 5536d2df3d18fe0920263466f7b46a56351c0510
   React-performancetimeline: 9041c53efa07f537164dcfe7670a36642352f4c2
   React-RCTActionSheet: 42195ae666e6d79b4af2346770f765b7c29435b9
   React-RCTAnimation: fa103ccc3503b1ed8dedca7e62e7823937748843
-  React-RCTAppDelegate: 665d4baf19424cef08276e9ac0d8771eec4519f9
+  React-RCTAppDelegate: 2ee875077ee5b5a6e48aa2700fc3c18c6d118612
   React-RCTBlob: 0fa9530c255644db095f2c4fd8d89738d9d9ecc0
-  React-RCTFabric: 1fcd8af6e25f92532f56b4ba092e58662c14d156
-  React-RCTFBReactNativeSpec: db171247585774f9f0a30f75109cc51568686213
+  React-RCTFabric: 4b4123f8e0b919e298cc41ea17c7fad9446dc8c7
+  React-RCTFBReactNativeSpec: 50be51842148dd53ea44673a4787ebb90dbdfe4f
   React-RCTImage: ba824e61ce2e920a239a65d130b83c3a1d426dff
   React-RCTLinking: d2dc199c37e71e6f505d9eca3e5c33be930014d4
   React-RCTNetwork: 87137d4b9bd77e5068f854dd5c1f30d4b072faf6
-  React-RCTRuntime: 137fafaa808a8b7e76a510e8be45f9f827899daa
+  React-RCTRuntime: c8578e980313bdb4eed18622f2fb2568612b79e8
   React-RCTSettings: 71f5c7fd7b5f4e725a4e2114a4b4373d0e46048f
   React-RCTText: b94d4699b49285bee22b8ebf768924d607eccee3
   React-RCTVibration: 6e3993c4f6c36a3899059f9a9ead560ddaf5a7d7
@@ -2588,9 +2594,9 @@ SPEC CHECKSUMS:
   ReactCodegen: 1d05923ad119796be9db37830d5e5dc76586aa00
   ReactCommon: 394c6b92765cf6d211c2c3f7f6bc601dffb316a6
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Survicate: a8735f5c5c230f89347f1b278c8784c370de35c1
+  Survicate: dc5475ebaca6e647321c862aa28e78b28c379ec4
   Yoga: a3ed390a19db0459bd6839823a6ac6d9c6db198d
 
-PODFILE CHECKSUM: e52418cddec425c0777d1c359f23118e3b873928
+PODFILE CHECKSUM: 9487b66e166112aa6a6698f7c1b2966ab4a50226
 
 COCOAPODS: 1.16.2

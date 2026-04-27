@@ -34,7 +34,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>RCTNewArchEnabled</key>
-	<true/>
+	<false/>
 	<key>Survicate</key>
 	<dict>
 		<key>WorkspaceKey</key>
