@@ -6,14 +6,6 @@ require Pod::Executable.execute_command('node', ['-p',
   )', __dir__]).strip
 
 platform :ios, min_ios_version_supported
-
-# Workaround: Survicate iOS bridge emits events via the legacy
-# RCTEventEmitter channel which is not registered as a callable module
-# under New Architecture / bridgeless runtime (RN 0.74+ default).
-# Disable New Arch on iOS until the SDK migrates to
-# CodegenTypes.EventEmitter or RCTDeviceEventEmitter dispatch.
-ENV['RCT_NEW_ARCH_ENABLED'] = '0'
-
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
