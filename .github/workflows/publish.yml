@@ -42,7 +42,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm for trusted publishing support
-        run: npm install -g npm@latest
+        # Pinned to npm 11 — npm 12 requires Node >=22.22.2, which conflicts
+        # with the Node 22.22.1 pin above. Trusted publishing needs npm >=11.5.1.
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
