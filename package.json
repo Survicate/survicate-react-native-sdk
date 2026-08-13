@@ -1,7 +1,7 @@
 {
   "name": "@survicate/react-native-survicate",
   "title": "React Native Survicate Bindings",
-  "version": "8.3.1",
+  "version": "8.3.2",
   "description": "React Native bindings for Survicate Mobile SDK",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -63,7 +63,7 @@
     "@types/jest": "^29.5.4",
     "@types/react": "^19.2.8",
     "@types/react-test-renderer": "^19.1.0",
-    "expo": "^54.0.31",
+    "expo": "^57.0.12",
     "react": "^19.2.3",
     "react-native": "^0.83.1",
     "react-native-builder-bob": "^0.40.17",
