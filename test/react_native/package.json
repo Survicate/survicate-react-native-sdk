@@ -24,7 +24,6 @@
     "@react-native/babel-preset": "0.81.4",
     "@react-native/metro-config": "0.81.4",
     "@react-native/typescript-config": "0.81.4",
-    "react-native-builder-bob": "^0.30.0",
     "react-native-dotenv": "^3.4.11"
   },
   "engines": {
